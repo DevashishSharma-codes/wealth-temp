@@ -85,7 +85,7 @@ export function StepProgress({ currentStep = 1, totalSteps = 5, goToStep }) {
 }
 
 export function Header({ currentStep = 1, totalSteps = 5, goToStep, showReport = false }) {
-  const isFinalPage = currentStep === 5 || showReport;
+  const isFinalPage = Boolean(showReport);
 
   return (
     <header className="py-8 bg-transparent flex flex-col items-center">
@@ -116,7 +116,7 @@ export function Header({ currentStep = 1, totalSteps = 5, goToStep, showReport =
       </h1>
 
       {/* Step progress indicator */}
-      {!showReport && currentStep !== 5 && (
+      {!showReport && (
         <StepProgress currentStep={currentStep} totalSteps={totalSteps} goToStep={goToStep} />
       )}
     </header>
