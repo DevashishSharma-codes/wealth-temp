@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import wealthWisdomLogo from "../../assets/wealth-wisdom-logo.png";
 
 /* ------------------------------------------------------------------
-   Neumorphic tokens (matched from provided step-indicator SVG)
+   Neumorphic tokens & Glassy Blue Theme
    Light source: top-left.
 -------------------------------------------------------------------*/
-const TRACK_COLOR = "#E3DED3";
-const STEP_INACTIVE_BG = "#F5F3ED";
-const STEP_INACTIVE_TEXT = "#7B7B7B";
-const STEP_ACTIVE_BG = "#FDA55E";
+const TRACK_COLOR = "#D5E5FA";
+const STEP_INACTIVE_BG = "rgba(240, 246, 255, 0.8)";
+const STEP_INACTIVE_TEXT = "#475569";
+const STEP_ACTIVE_BG = "radial-gradient(135% 135% at 50% 15%, #2459D2 0%, #153FA8 65%, #0E2C7E 100%)";
 
 /**
  * Step progress indicator.
@@ -29,33 +29,37 @@ export function StepProgress({ currentStep = 1, totalSteps = 5, goToStep }) {
               <button
                 type="button"
                 onClick={() => goToStep && goToStep(step)}
-                className={`relative shrink-0 rounded-full flex items-center justify-center font-bold transition-all duration-200 cursor-pointer ${isActive
+                className={`relative shrink-0 rounded-full flex items-center justify-center font-bold transition-all duration-200 cursor-pointer ${
+                  isActive
                     ? "w-14 h-14 sm:w-16 sm:h-16 text-lg sm:text-xl"
                     : "w-11 h-11 sm:w-14 sm:h-14 text-sm sm:text-base"
-                  }`}
+                }`}
                 style={
                   isActive
                     ? {
-                      // ACTIVE: Orange background, white text, glowing outer shadow
-                      background: STEP_ACTIVE_BG,
-                      color: "#FCFAF6",
-                      boxShadow:
-                        "8px 8px 10px rgba(184,177,164,0.35), -8px -8px 10px rgba(255,255,255,0.9), 0 8px 12px rgba(253,165,94,0.2), inset 2px 2px 3px rgba(212,196,176,0.8), inset -2px -2px 3px rgba(255,255,255,1)",
-                    }
-                    : isComplete
-                      ? {
-                        // COMPLETED (PAST): Default color, Outer (raised) shadow
-                        background: STEP_INACTIVE_BG,
-                        color: STEP_INACTIVE_TEXT,
+                        // ACTIVE: Glassy Blue Button style
+                        background: STEP_ACTIVE_BG,
+                        color: "#FFFFFF",
+                        border: "1.5px solid rgba(175, 215, 255, 0.7)",
                         boxShadow:
-                          "4px 4px 8px rgba(212,196,176,0.8), -4px -4px 8px rgba(255,255,255,1)",
+                          "0 8px 20px -2px rgba(36,89,210,0.4), inset 0 1.5px 2px rgba(255,255,255,0.85), inset 0 0 16px 2px rgba(119,177,236,0.85)",
                       }
-                      : {
-                        // UNVISITED (FUTURE): Default color, Inner (inset) shadow
-                        background: STEP_INACTIVE_BG,
-                        color: STEP_INACTIVE_TEXT,
+                    : isComplete
+                    ? {
+                        // COMPLETED: Crisp White surface, blue text
+                        background: "#FFFFFF",
+                        color: "#2459D2",
+                        border: "1px solid #CBD5E1",
                         boxShadow:
-                          "inset 4px 4px 6px rgba(212,196,176,0.8), inset -4px -4px 6px rgba(255,255,255,1)",
+                          "3px 3px 7px #CAD5E2, -3px -3px 7px #FFFFFF",
+                      }
+                    : {
+                        // UNVISITED: Neumorphic Inset
+                        background: "#EEF2F6",
+                        color: "#64748B",
+                        border: "1px solid rgba(255, 255, 255, 0.9)",
+                        boxShadow:
+                          "inset 3px 3px 6px #CAD5E2, inset -3px -3px 6px #FFFFFF",
                       }
                 }
               >
@@ -66,10 +70,9 @@ export function StepProgress({ currentStep = 1, totalSteps = 5, goToStep }) {
                 <div
                   className="flex-1 h-[6px] rounded-full mx-1 sm:mx-2"
                   style={{
-                    // MATCHING FIGMA: Track lines always stay default color and inset
-                    background: TRACK_COLOR,
+                    background: isComplete ? "#2459D2" : "#CBD5E1",
                     boxShadow:
-                      "inset 1px 1px 3px rgba(212,196,176,0.8), inset -1px -1px 3px rgba(255,255,255,1)",
+                      "inset 1px 1px 2px rgba(15,23,42,0.12), inset -1px -1px 2px #FFFFFF",
                   }}
                 />
               )}
@@ -82,6 +85,8 @@ export function StepProgress({ currentStep = 1, totalSteps = 5, goToStep }) {
 }
 
 export function Header({ currentStep = 1, totalSteps = 5, goToStep, showReport = false }) {
+  const isFinalPage = currentStep === 5 || showReport;
+
   return (
     <header className="py-8 bg-transparent flex flex-col items-center">
       {/* Centered Logo */}
@@ -90,12 +95,28 @@ export function Header({ currentStep = 1, totalSteps = 5, goToStep, showReport =
       </a>
 
       {/* Title */}
-      <h2 className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-[34px] font-extrabold tracking-tight mt-6 text-center px-4 animate-fade-in-up animate-text-wave select-none leading-normal">
-        Goal Analysis Assessment
-      </h2>
+      <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-[46px] xl:text-[50px] font-black tracking-tight mt-6 mb-2 text-center px-4 select-none leading-tight animate-color-cycle">
+        {isFinalPage ? (
+          <span className="cool-title-container">
+            <span className="cool-word-pop-1">Thank</span>
+            <span className="cool-word-pop-2">You!</span>
+          </span>
+        ) : (
+          <span className="cool-title-container">
+            <span className="cool-word-pop-1">Goal</span>
+            <span className="cool-word-pop-2">Analysis</span>
+            <span className="cool-word-pop-3">Assessment</span>
+            <span className="inline-flex items-baseline ml-1 space-x-1 font-black text-[#01569e]">
+              <span className="dot-wave-1">.</span>
+              <span className="dot-wave-2">.</span>
+              <span className="dot-wave-3">.</span>
+            </span>
+          </span>
+        )}
+      </h1>
 
       {/* Step progress indicator */}
-      {!showReport && (
+      {!showReport && currentStep !== 5 && (
         <StepProgress currentStep={currentStep} totalSteps={totalSteps} goToStep={goToStep} />
       )}
     </header>

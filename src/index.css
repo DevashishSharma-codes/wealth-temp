@@ -1,16 +1,18 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Montserrat', sans-serif;
-  --font-heading: 'Montserrat', sans-serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, "Inter", Arial, sans-serif;
+  --font-heading: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, "Inter", Arial, sans-serif;
 
-  --color-brand-blue: #1E2B49;
+  --color-brand-blue: #183B91;
+  --color-brand-royal: #2459D2;
+  --color-brand-sky: #77B1EC;
   --color-brand-gold: #EAA850;
-  --color-brand-orange: #ED8B36;
+  --color-brand-orange: #2459D2;
   --color-brand-dark: #1C1B1A;
   --color-brand-light: #FBFBFA;
   --color-brand-beige: #FAF8F5;
-  --color-brand-accent: #E56A1F;
+  --color-brand-accent: #2459D2;
 }
 
 html {
@@ -30,15 +32,18 @@ html {
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
-  background-color: #FAF7F2;
-  color: #201f1d;
-  overflow-x: hidden;
-  letter-spacing: -0.01em;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, "Inter", Arial, sans-serif;
+  background-color: #F4F8FE;
+  color: #1C1B1A;
+  overflow-x: clip;
+  letter-spacing: -0.015em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, "Inter", Arial, sans-serif;
+  letter-spacing: -0.03em;
 }
 
 @keyframes float {
@@ -52,6 +57,113 @@ h1, h2, h3, h4, h5, h6 {
 
 .animate-float {
   animation: float 4s ease-in-out infinite;
+}
+
+@keyframes coolWordPop {
+  0% {
+    opacity: 0;
+    transform: translateY(28px) scale(0.65) rotate(-3.5deg);
+    filter: blur(6px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.12) rotate(1.5deg);
+    filter: blur(0px);
+  }
+  80% {
+    transform: translateY(3px) scale(0.97) rotate(-0.5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+  }
+}
+
+@keyframes continuousFloatPop {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.02);
+  }
+}
+
+.cool-title-container {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.35em;
+  animation: continuousFloatPop 4s ease-in-out 0.8s infinite;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: default;
+}
+
+.cool-title-container:hover {
+  transform: scale(1.04) translateY(-3px);
+}
+
+.cool-word-pop-1 {
+  display: inline-block;
+  animation: coolWordPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both;
+}
+
+.cool-word-pop-2 {
+  display: inline-block;
+  animation: coolWordPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.28s both;
+}
+
+.cool-word-pop-3 {
+  display: inline-block;
+  animation: coolWordPop 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.46s both;
+}
+
+@keyframes richColorShift {
+  0% {
+    color: #0F172A;
+  }
+  25% {
+    color: #00297c;
+  }
+  50% {
+    color: #183B91;
+  }
+  75% {
+    color: #01569e;
+  }
+  100% {
+    color: #0F172A;
+  }
+}
+
+.animate-color-cycle {
+  animation: richColorShift 5s ease-in-out infinite;
+}
+
+@keyframes movingDotsWave {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  30% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+}
+
+.dot-wave-1 {
+  display: inline-block;
+  animation: movingDotsWave 1.4s ease-in-out infinite 0s;
+}
+
+.dot-wave-2 {
+  display: inline-block;
+  animation: movingDotsWave 1.4s ease-in-out infinite 0.2s;
+}
+
+.dot-wave-3 {
+  display: inline-block;
+  animation: movingDotsWave 1.4s ease-in-out infinite 0.4s;
 }
 
 @keyframes fadeInUp {
@@ -99,7 +211,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .animate-text-wave {
-  background: linear-gradient(120deg, #1E2B49 0%, #9C3A03 25%, #C28020 50%, #9C3A03 75%, #1E2B49 100%);
+  background: linear-gradient(120deg, #183B91 0%, #2459D2 25%, #6EACFF 50%, #2459D2 75%, #183B91 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -119,8 +231,9 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-.animate-shader-orange {
-  background: linear-gradient(90deg, #F0883E 0%, #FFB067 25%, #E56A1F 50%, #F7AA5B 75%, #F0883E 100%);
+.animate-shader-orange,
+.animate-shader-blue {
+  background: linear-gradient(90deg, #2459D2 0%, #6EACFF 25%, #183B91 50%, #3B74F2 75%, #2459D2 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -129,170 +242,312 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bubbly-text-shadow {
-  filter: drop-shadow(3px 3px 6px rgba(210, 100, 30, 0.35)) drop-shadow(-2px -2px 5px rgba(255, 255, 255, 0.95));
+  filter: drop-shadow(3px 3px 6px rgba(36, 89, 210, 0.3)) drop-shadow(-2px -2px 5px rgba(255, 255, 255, 0.95));
 }
 
 /* ------------------------------------------------------------------
    Global Neumorphic Styles
 --------------------------------------------------------------------*/
 :root {
-  --surface-color: #F4F1EA;
-  --text-dark: #2B2A28;
-  --text-muted: #8A8578;
-  --placeholder-color: #A8A094;
-  --orange-color: #F0883E;
-  --orange-dark-color: #E07A2E;
-  --orange-glow: rgba(240, 136, 62, 0.45);
-  --orange-border-color: rgba(240, 136, 62, 0.4);
+  --surface-color: #F2F7FD;
+  --text-dark: #1E2838;
+  --text-muted: #6B7B96;
+  --placeholder-color: #94A3B8;
+  --orange-color: #2459D2;
+  --orange-dark-color: #183B91;
+  --orange-glow: rgba(36, 89, 210, 0.45);
+  --orange-border-color: rgba(36, 89, 210, 0.35);
+  --blue-primary: #2459D2;
+  --blue-sky: #77B1EC;
+  --blue-dark: #183B91;
+  --blue-glow: rgba(36, 89, 210, 0.45);
 }
 
 .neu-field {
-  background-color: #F1EDE6 !important;
-  border: 1px solid #EFE9DF !important;
-  box-shadow: inset 5px 5px 6px rgba(221, 212, 199, 0.75), inset -5px -5px 6px rgba(255, 255, 255, 1) !important;
-  color: var(--text-dark) !important;
-  outline: none;
-  transition: all 150ms ease-in-out;
+  background: #EEF2F6 !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 9999px !important;
+  box-shadow:
+    inset 4px 4px 8px #C8D3E0,
+    inset -4px -4px 8px #FFFFFF !important;
+  color: #0F172A !important;
+  font-weight: 500;
+  transition: all 180ms ease-in-out;
 }
 
 .neu-field::placeholder {
-  color: var(--placeholder-color) !important;
+  color: #94A3B8 !important;
+  font-weight: 400;
 }
 
 .neu-field:hover {
-  border-color: #EFE9DF !important;
-  box-shadow: inset 4px 4px 6px 2px rgba(240, 136, 62, 0.45), inset -4px -4px 6px rgba(255, 255, 255, 1) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(240, 248, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0.9) 100%
+  ) !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow:
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 1),
+    inset 3px 3px 6px rgba(180, 205, 235, 0.35),
+    inset -3px -3px 6px rgba(255, 255, 255, 1),
+    inset 0 0 18px 3px rgba(119, 177, 236, 0.45),
+    0 4px 12px rgba(36, 89, 210, 0.06),
+    -2px -2px 8px #FFFFFF !important;
 }
 
-.neu-field:focus {
-  border-color: #EFE9DF !important;
-  box-shadow: inset 4px 4px 8px 3px rgba(240, 136, 62, 0.6), inset -4px -4px 8px rgba(255, 255, 255, 1) !important;
+/* Active / Focused: Deep sunken inner shadow, ZERO blue outline */
+.neu-field:focus,
+.neu-field-active {
+  background: #E5EDF6 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow:
+    inset 5px 5px 10px #B4C4D6,
+    inset -5px -5px 10px #FFFFFF,
+    inset 0 0 14px 2px rgba(119, 177, 236, 0.35) !important;
+  color: #0F172A !important;
+  font-weight: 700 !important;
 }
 
+/* Completed / Filled: Crisp clean filled surface, ZERO blue outline */
 .neu-field-filled {
-  background-color: #F1EDE6 !important;
-  border: 1px solid #EFE9DF !important;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.08) !important;
-  color: var(--text-dark) !important;
-  outline: none;
-  transition: all 200ms ease-in-out;
+  background: #F8FAFC !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 9999px !important;
+  box-shadow:
+    inset 2px 2px 5px #D0DAE7,
+    inset -2px -2px 5px #FFFFFF,
+    0 1px 3px rgba(15, 23, 42, 0.03) !important;
+  color: #0F172A !important;
+  font-weight: 600 !important;
+  transition: all 180ms ease-in-out;
 }
 
 .neu-field-filled::placeholder {
-  color: var(--placeholder-color) !important;
+  color: #94A3B8 !important;
 }
 
 .neu-field-filled:hover {
-  border-color: #EFE9DF !important;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.12) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(245, 250, 255, 0.85) 50%,
+    rgba(255, 255, 255, 0.95) 100%
+  ) !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow:
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 1),
+    inset 2px 2px 5px rgba(180, 205, 235, 0.3),
+    inset -2px -2px 5px rgba(255, 255, 255, 1),
+    inset 0 0 16px 2px rgba(119, 177, 236, 0.4),
+    0 4px 12px rgba(36, 89, 210, 0.05),
+    -2px -2px 8px #FFFFFF !important;
 }
 
 .neu-field-filled:focus {
-  border-color: #EFE9DF !important;
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.15) !important;
+  background: #E5EDF6 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow:
+    inset 5px 5px 10px #B4C4D6,
+    inset -5px -5px 10px #FFFFFF,
+    inset 0 0 14px 2px rgba(119, 177, 236, 0.35) !important;
+  color: #0F172A !important;
+  font-weight: 700 !important;
 }
 
 .neu-prefix {
-  background-color: #F1EDE6;
-  border: 1px solid #EFE9DF;
-  box-shadow: inset 3px 3px 5px rgba(221, 212, 199, 0.75), inset -3px -3px 5px rgba(255, 255, 255, 1);
-  color: var(--text-dark);
+  background: #EEF2F6 !important;
+  border: none !important;
+  outline: none !important;
+  border-radius: 9999px !important;
+  box-shadow:
+    inset 3px 3px 6px #C8D3E0,
+    inset -3px -3px 6px #FFFFFF !important;
+  color: #0F172A !important;
+  font-weight: 700 !important;
 }
 
 .neu-checkbox {
-  background-color: #FFA500;
-  border: 1px solid #EFE9DF;
-  box-shadow: inset 3px 3px 5px rgba(221, 212, 199, 0.75), inset -3px -3px 5px rgba(255, 255, 255, 1);
+  background-color: #2459D2;
+  border: 1.5px solid rgba(119, 177, 236, 0.5);
+  box-shadow: inset 0 1.5px 2px rgba(255, 255, 255, 0.8), inset 0 0 10px rgba(119, 177, 236, 0.5);
   transition: all 150ms ease-in-out;
 }
 
 .neu-checkbox:hover {
-  box-shadow: inset 3px 3px 5px rgba(240, 136, 62, 0.35), inset -3px -3px 5px rgba(255, 255, 255, 1);
+  box-shadow: 0 0 0 3px rgba(119, 177, 236, 0.3), inset 0 1.5px 2px rgba(255, 255, 255, 1);
 }
 
-/* ── Raised Neumorphic Button ── */
+/* ── Raised Neumorphic / Glassy Morphism Button (Matching Reference Photo) ── */
+.glass-morphism-btn,
 .neu-btn-raised {
-  background: linear-gradient(180deg, #F7AA5B 0%, #EE9640 100%), #F5A04D !important;
-  border: 1px solid rgba(255, 255, 255, 0.08) !important;
-  border-radius: 12px !important;
+  background: radial-gradient(135% 135% at 50% 15%, #2459D2 0%, #153FA8 65%, #0E2C7E 100%) !important;
+  border: 1.5px solid rgba(175, 215, 255, 0.65) !important;
+  border-radius: 16px !important;
   box-shadow:
-    8px 8px 16px #D9D4C7,
-    -8px -8px 16px #FFFFFF,
-    inset 1px 1px 2px rgba(255, 255, 255, 0.4),
-    0 0 15px rgba(240, 136, 62, 0.3) !important;
+    /* Top specular glass reflection */
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.85),
+    /* Vibrant electric sky-blue inner rim glow - EXACT to reference photo */
+    inset 0 0 18px 3px rgba(119, 177, 236, 0.85),
+    /* Deep bottom glass refraction */
+    inset 0 -4px 10px rgba(8, 22, 65, 0.7),
+    /* Clean subtle grounding shadow - NO outer neon glow */
+    0 4px 12px -2px rgba(15, 45, 120, 0.25) !important;
   color: #FFFFFF !important;
-  transition: all 0.2s ease-in-out;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.glass-morphism-btn:hover,
 .neu-btn-raised:hover {
+  /* Brighter, glowing sky-blue internal core on hover */
+  background: radial-gradient(135% 135% at 50% 10%, #3574FF 0%, #1E54E5 55%, #1036A0 100%) !important;
+  border-color: rgba(220, 242, 255, 0.95) !important;
   box-shadow:
-    10px 10px 20px #D9D4C7,
-    -10px -10px 20px #FFFFFF,
-    inset 1px 1px 3px rgba(255, 255, 255, 0.5),
-    0 0 20px rgba(240, 136, 62, 0.5) !important;
-  transform: translateY(-1px);
+    /* Top crisp specular highlight */
+    inset 0 2px 4px 0 rgba(255, 255, 255, 1),
+    /* Intense internal glassy bloom & glowing rim - PURELY INSIDE */
+    inset 0 0 28px 6px rgba(119, 177, 236, 0.98),
+    inset 0 0 12px 2px rgba(255, 255, 255, 0.75),
+    /* Deep bottom inner refraction */
+    inset 0 -4px 12px rgba(8, 22, 65, 0.5),
+    /* Grounding shadow ONLY - strictly NO outside glow */
+    0 6px 14px -3px rgba(15, 45, 120, 0.28) !important;
+  transform: translateY(-1.5px) scale(1.015);
 }
 
+.glass-morphism-btn:active,
 .neu-btn-raised:active {
+  background: radial-gradient(135% 135% at 50% 40%, #153FA8 0%, #0E297A 100%) !important;
   box-shadow:
-    inset 6px 6px 12px rgba(200, 100, 30, 0.6),
-    inset -6px -6px 12px rgba(255, 255, 255, 0.4) !important;
+    inset 0 2px 6px rgba(5, 18, 55, 0.85),
+    inset 0 0 14px 2px rgba(119, 177, 236, 0.7),
+    0 2px 6px rgba(15, 45, 120, 0.2) !important;
   transform: translateY(1px) scale(0.98);
 }
 
+.glass-morphism-btn:disabled,
 .neu-btn-raised:disabled {
-  background: #E7E3D9 !important;
+  background: #CBD5E1 !important;
   border: 1px solid transparent !important;
-  box-shadow: 4px 4px 10px #D9D4C7, -4px -4px 10px #FFFFFF !important;
-  color: #B6B1A4 !important;
+  box-shadow: none !important;
+  color: #94A3B8 !important;
   cursor: not-allowed;
   transform: none;
 }
 
+/* ── Bubbly Glassmorphic + Neumorphic Card with Inner Shadows ── */
+.glass-morphism-card,
+.glass-aurora-card,
+.neu-card-raised {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.88) 0%,
+    rgba(240, 247, 255, 0.65) 50%,
+    rgba(255, 255, 255, 0.82) 100%
+  ) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
+  border-radius: 1.75rem !important;
+  box-shadow:
+    /* Outer soft neumorphic cushion shadow */
+    8px 12px 24px -4px rgba(160, 185, 215, 0.4),
+    -8px -8px 24px 0 #FFFFFF,
+    /* Bubbly top specular rim shine */
+    inset 0 2px 3px 0 rgba(255, 255, 255, 1),
+    /* Bubbly dual neumorphic inner bevel */
+    inset 3px 3px 6px rgba(180, 205, 235, 0.35),
+    inset -3px -3px 6px rgba(255, 255, 255, 0.95),
+    /* Internal glassy ambient bubble glow */
+    inset 0 0 18px 2px rgba(119, 177, 236, 0.22),
+    /* Bottom glass refraction */
+    inset 0 -3px 6px rgba(36, 89, 210, 0.06) !important;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-morphism-card:hover,
+.glass-aurora-card:hover,
+.neu-card-raised:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(235, 245, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0.92) 100%
+  ) !important;
+  border-color: #FFFFFF !important;
+  box-shadow:
+    /* Outer elevation */
+    12px 18px 32px -4px rgba(160, 185, 215, 0.5),
+    -10px -10px 30px 0 #FFFFFF,
+    /* Intensified bubbly top specular shine */
+    inset 0 2.5px 4px 0 rgba(255, 255, 255, 1),
+    /* Deepened bubbly inner bevel */
+    inset 3px 3px 8px rgba(180, 205, 235, 0.45),
+    inset -3px -3px 8px rgba(255, 255, 255, 1),
+    /* Radiant glassy bubble glow */
+    inset 0 0 24px 4px rgba(119, 177, 236, 0.35),
+    /* Bottom glass refraction */
+    inset 0 -4px 8px rgba(36, 89, 210, 0.10) !important;
+  transform: translateY(-3px);
+}
+
+/* Glassy Morphism Blue Accent Hero Card */
+.glass-morphism-card-blue {
+  background: radial-gradient(130% 130% at 50% 20%, #1A46C4 0%, #103294 65%, #0B2268 100%) !important;
+  border: 1.5px solid rgba(160, 205, 255, 0.5) !important;
+  border-radius: 1.5rem !important;
+  box-shadow:
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.8),
+    inset 0 0 18px 2px rgba(119, 177, 236, 0.6),
+    0 16px 36px -6px rgba(16, 45, 130, 0.35) !important;
+  color: #FFFFFF !important;
+}
+
 /* Flat/Soft neumorphic button (Active vs Inactive) */
 .neu-btn-flat-active {
-  background-color: #FFF6ED !important;
-  border: 1px solid var(--orange-color) !important;
-  box-shadow: inset 3px 3px 5px rgba(240, 136, 62, 0.15), inset -3px -3px 5px rgba(255, 255, 255, 1) !important;
-  color: var(--orange-color) !important;
+  background-color: #FFFFFF !important;
+  border: 1px solid #CBD5E1 !important;
+  box-shadow: 3px 3px 7px #CAD5E2, -3px -3px 7px #FFFFFF, inset 0 1px 1.5px #FFFFFF !important;
+  color: #2459D2 !important;
   font-weight: bold;
 }
 
 .neu-btn-flat-inactive {
-  background-color: #FAF7F2 !important;
-  border: 1px solid #EFE9DF !important;
-  box-shadow: 3px 3px 5px #D9D4C7, -3px -3px 5px #FFFFFF !important;
-  color: var(--text-muted) !important;
+  background-color: #EEF2F6 !important;
+  border: 1px solid rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 3px 3px 6px #CAD5E2, -3px -3px 6px #FFFFFF !important;
+  color: #475569 !important;
 }
 
 .neu-btn-flat-inactive:hover {
-  background-color: #F1EDE6 !important;
-}
-
-/* Card Neumorphic Raised */
-.neu-card-raised {
-  background-color: #FAF7F2 !important;
-  border: 1px solid #EFE9DF !important;
-  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.08) !important;
+  background-color: #F8FAFC !important;
+  color: #0F172A !important;
 }
 
 /* Card Neumorphic Inset */
 .neu-card-inset {
-  background-color: #F1EDE6 !important;
-  border: 1px solid #EFE9DF !important;
-  box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.06) !important;
+  background-color: #EEF2F6 !important;
+  border: none !important;
+  border-radius: 1.25rem !important;
+  box-shadow: inset 4px 4px 8px #CAD5E2, inset -4px -4px 8px #FFFFFF !important;
 }
 
 /* Neumorphic Embossed Text Effect */
 .neu-text-embossed {
-  text-shadow: 1.5px 1.5px 3px rgba(221, 212, 199, 0.8), -1.5px -1.5px 3px rgba(255, 255, 255, 1) !important;
-}
-
-/* Orangish-whitish premium neumorphic card bg */
-.neu-card-orange-classic {
-  background-color: #FFEBD6 !important;
-  border: 1px solid #EFE9DF !important;
-  box-shadow: inset 5px 5px 8px rgba(214, 203, 186, 0.85), inset -5px -5px 8px rgba(255, 255, 255, 1) !important;
+  text-shadow: 1px 1px 2px rgba(180, 205, 240, 0.5), -1px -1px 2px #FFFFFF !important;
 }
 
 /* ── Glassmorphic Floating Popup Modal Styles ── */

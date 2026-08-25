@@ -71,7 +71,7 @@ const ArrowRightIcon = ({ className = "w-5 h-5" }) => (
 );
 
 const ChevronDown = ({ open }) => (
-  <svg className={`w-4 h-4 text-[#F0883E] transition-transform duration-200 ${open ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+  <svg className={`w-4 h-4 text-[#2459D2] transition-transform duration-200 ${open ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
   </svg>
 );
@@ -291,26 +291,26 @@ export function TripPlanModal({ isOpen, onClose, onSave, goal, childrenCount }) 
 
   const modalJSX = (
     <div
-      className="fixed inset-0 z-[9999] bg-[#1C1B1A]/40 backdrop-blur-md flex items-center justify-center p-2 sm:p-6 lg:p-8 overflow-hidden select-none animate-fade-in text-[#2B2A28]"
+      className="fixed inset-0 z-[9999] bg-slate-900/40 backdrop-blur-md flex items-center justify-center p-2 sm:p-6 lg:p-8 overflow-hidden select-none animate-fade-in text-[#0E2C7E]"
       aria-modal="true"
       role="dialog"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-7xl h-[95dvh] sm:h-auto sm:max-h-[92vh] bg-[#FAF7F2] border border-[#EFE9DF] rounded-2xl sm:rounded-[32px] flex flex-col overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.25)] relative"
+        className="w-full max-w-7xl h-[95dvh] sm:h-auto sm:max-h-[92vh] bg-white/95 border border-[#77B1EC]/40 rounded-2xl sm:rounded-[32px] flex flex-col overflow-hidden shadow-2xl relative backdrop-blur-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="shrink-0 min-h-[56px] sm:h-20 px-4 sm:px-10 border-b border-[#EFE9DF] bg-[#FAF7F2] flex items-center justify-between gap-3 z-10 py-2 sm:py-0">
+        <div className="shrink-0 min-h-[56px] sm:h-20 px-4 sm:px-10 border-b border-[#77B1EC]/30 bg-white/80 flex items-center justify-between gap-3 z-10 py-2 sm:py-0">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-[#FFF6ED] border border-[#EFE9DF] flex items-center justify-center text-[#F0883E] shrink-0 shadow-inner">
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl sm:rounded-2xl bg-[#77B1EC]/20 border border-[#77B1EC]/40 flex items-center justify-center text-[#2459D2] shrink-0 shadow-xs">
               <CompassIcon className="w-5 h-5" />
             </div>
             <div>
-              <h3 className="font-heading text-sm sm:text-xl font-extrabold text-[#2B2A28] leading-tight">
+              <h3 className="font-heading text-sm sm:text-xl font-extrabold text-[#0E2C7E] leading-tight">
                 Foreign Tour Planning
               </h3>
-              <p className="text-[11px] sm:text-xs text-[#8A8578] font-medium mt-0.5 hidden sm:block">
+              <p className="text-[11px] sm:text-xs text-[#64748B] font-medium mt-0.5 hidden sm:block">
                 Calculate estimated trip cost for {tripTravellers || 1} travellers
               </p>
             </div>
@@ -319,14 +319,14 @@ export function TripPlanModal({ isOpen, onClose, onSave, goal, childrenCount }) 
             type="button"
             onClick={onClose}
             aria-label="Close panel"
-            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center neu-btn-flat-inactive transition-all cursor-pointer text-[#2B2A28] hover:text-[#F0883E] outline-none shrink-0"
+            className="w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center neu-btn-flat-inactive transition-all cursor-pointer text-[#0E2C7E] hover:text-[#2459D2] outline-none shrink-0"
           >
             <XIcon className="w-5 h-5" />
           </button>
         </div>
 
         {/* Scrollable Content (Hidden Scrollbars) */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-10 no-scrollbar scrollbar-none bg-[#FAF7F2]">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-10 no-scrollbar scrollbar-none bg-white/40">
           <div className="max-w-7xl mx-auto space-y-6 sm:space-y-8">
 
             {/* Mode Switcher & Category Filter */}
@@ -344,15 +344,15 @@ export function TripPlanModal({ isOpen, onClose, onSave, goal, childrenCount }) 
                       type="button"
                       onClick={() => setTripPlanningType(key)}
                       className={`p-2.5 sm:p-4 rounded-2xl sm:rounded-3xl transition-all cursor-pointer flex items-center gap-2 sm:gap-3.5 text-left overflow-hidden min-w-0 ${
-                        active ? 'neu-btn-flat-active' : 'neu-btn-flat-inactive'
+                        active ? 'glass-morphism-card border-[#2459D2]' : 'bg-slate-100/70 border border-[#77B1EC]/20 hover:bg-[#77B1EC]/15'
                       }`}
                     >
-                      <div className={`p-1.5 sm:p-2.5 rounded-xl border border-[#EFE9DF] shrink-0 ${active ? 'bg-[#FFF6ED] text-[#F0883E]' : 'bg-[#FAF7F2] text-[#8A8578]'}`}>
+                      <div className={`p-1.5 sm:p-2.5 rounded-xl border border-[#77B1EC]/30 shrink-0 ${active ? 'bg-[#77B1EC]/20 text-[#2459D2]' : 'bg-white text-[#64748B]'}`}>
                         <Icon className="w-4 h-4 sm:w-5 sm:h-5" />
                       </div>
                       <div className="min-w-0 flex-1 overflow-hidden">
-                        <div className={`text-xs sm:text-sm font-extrabold truncate ${active ? 'text-[#F0883E]' : 'text-[#2B2A28]'}`}>{label}</div>
-                        <div className="text-[10px] sm:text-[11px] text-[#8A8578] font-medium mt-0.5 truncate">{sub}</div>
+                        <div className={`text-xs sm:text-sm font-extrabold truncate ${active ? 'text-[#2459D2]' : 'text-[#0E2C7E]'}`}>{label}</div>
+                        <div className="text-[10px] sm:text-[11px] text-[#64748B] font-medium mt-0.5 truncate">{sub}</div>
                       </div>
                     </button>
                   );
@@ -361,15 +361,15 @@ export function TripPlanModal({ isOpen, onClose, onSave, goal, childrenCount }) 
 
               {/* Category Dropdown */}
               <div className="md:col-span-5">
-                <label className="block text-xs font-bold text-[#2B2A28] mb-1.5 select-none flex items-center gap-1.5">
-                  <SlidersHorizontalIcon className="w-4 h-4 text-[#F0883E]" /> Travel Category Filter
+                <label className="block text-xs font-bold text-[#0E2C7E] mb-1.5 select-none flex items-center gap-1.5">
+                  <SlidersHorizontalIcon className="w-4 h-4 text-[#2459D2]" /> Travel Category Filter
                 </label>
                 <button
                   type="button"
                   onClick={() => setCatOpen(true)}
-                  className="neu-field w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold rounded-2xl outline-none flex justify-between items-center cursor-pointer hover:border-[#F0883E]/50 transition-all"
+                  className="neu-field w-full px-3.5 sm:px-4 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold rounded-2xl outline-none flex justify-between items-center cursor-pointer hover:border-[#2459D2]/50 transition-all"
                 >
-                  <span className={selectedCategory ? 'text-[#2B2A28] truncate' : 'text-[#8A8578] truncate'}>
+                  <span className={selectedCategory ? 'text-[#0E2C7E] truncate' : 'text-[#64748B] truncate'}>
                     {selectedCategory || 'All Travel Categories'}
                   </span>
                   <ChevronDown open={catOpen} />
@@ -396,24 +396,23 @@ export function TripPlanModal({ isOpen, onClose, onSave, goal, childrenCount }) 
               </div>
             </div>
 
-            {/* 2-Column Split Grid with Neumorphic Dual Shadows */}
+            {/* 2-Column Split Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
               {/* Left Column (7 cols): Destination Search or Budget Input */}
               <div
-                className="lg:col-span-7 space-y-5 sm:space-y-6 bg-[#FAF7F2] p-4 sm:p-8 rounded-2xl sm:rounded-[32px] border border-[#EFE9DF]"
-                style={{ boxShadow: '8px 8px 20px #E5DFD3, -8px -8px 20px #FFFFFF, inset 1px 1px 2px rgba(255, 255, 255, 0.8)' }}
+                className="lg:col-span-7 space-y-5 sm:space-y-6 glass-morphism-card p-4 sm:p-8 rounded-2xl sm:rounded-[32px]"
               >
                 {tripPlanningType === 'destinations' ? (
                   <div className="space-y-4">
-                    <label className="block text-xs font-bold text-[#2B2A28] select-none flex items-center gap-2">
-                      <MapPinIcon className="w-4 h-4 text-[#F0883E]" /> Search & Select Destination
+                    <label className="block text-xs font-bold text-[#0E2C7E] select-none flex items-center gap-2">
+                      <MapPinIcon className="w-4 h-4 text-[#2459D2]" /> Search & Select Destination
                     </label>
                     <button
                       type="button"
                       onClick={() => setDestOpen(true)}
-                      className="neu-field w-full px-3.5 sm:px-4 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold rounded-2xl outline-none flex items-center justify-between gap-3 text-left cursor-pointer hover:border-[#F0883E]/50 transition-all"
+                      className="neu-field w-full px-3.5 sm:px-4 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold rounded-2xl outline-none flex items-center justify-between gap-3 text-left cursor-pointer hover:border-[#2459D2]/50 transition-all"
                     >
-                      <span className="truncate text-[#8A8578]">Type country name or landmark...</span>
+                      <span className="truncate text-[#64748B]">Type country name or landmark...</span>
                       <ChevronDown open={destOpen} />
                     </button>
 
@@ -433,13 +432,13 @@ export function TripPlanModal({ isOpen, onClose, onSave, goal, childrenCount }) 
                         rightTag: Number.isFinite(d.cost) ? `${formatINR(d.cost)} /pp` : null,
                         disabled: tripSelectedDestinations.some((item) => item.id === d.id),
                         raw: d,
-                        icon: <MapPinIcon className="w-4 h-4 text-[#F0883E]" />,
+                        icon: <MapPinIcon className="w-4 h-4 text-[#2459D2]" />,
                       }))}
                     />
                   </div>
                 ) : (
                   <div className="space-y-4">
-                    <label className="block text-xs font-bold text-[#2B2A28] select-none">
+                    <label className="block text-xs font-bold text-[#0E2C7E] select-none">
                       Approx. Today's Cost (per person)
                     </label>
                     <input
@@ -456,13 +455,13 @@ export function TripPlanModal({ isOpen, onClose, onSave, goal, childrenCount }) 
 
                     {tripBudgetPerPerson && (
                       <div className="space-y-3 pt-2">
-                        <div className="text-[11px] font-bold text-[#8A8578] uppercase tracking-wider">
+                        <div className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider">
                           {loadingBudgetOptions ? 'Searching...' : 'Top 5 Matching Destinations'}
                         </div>
                         {loadingBudgetOptions ? (
                           <div className="space-y-2">
                             {[1, 2, 3].map((i) => (
-                              <div key={i} className="h-14 rounded-2xl bg-[#EFE9DF]/50 animate-pulse" />
+                              <div key={i} className="h-14 rounded-2xl bg-slate-100 animate-pulse" />
                             ))}
                           </div>
                         ) : budgetOptions.length > 0 ? (
@@ -484,28 +483,28 @@ export function TripPlanModal({ isOpen, onClose, onSave, goal, childrenCount }) 
                                   disabled={selected}
                                   className={`w-full text-left p-3.5 sm:p-4 rounded-2xl border transition-all flex items-center justify-between gap-3 ${
                                     selected
-                                      ? 'bg-[#FFF6ED] border-[#F0883E] shadow-inner cursor-default'
-                                      : 'border-[#EFE9DF] bg-white/50 hover:bg-[#FFF6ED]/80 hover:border-[#F0883E]/40 cursor-pointer'
+                                      ? 'bg-[#77B1EC]/20 border-[#2459D2] shadow-xs cursor-default'
+                                      : 'border-[#77B1EC]/30 bg-white/70 hover:bg-[#77B1EC]/15 hover:border-[#2459D2]/40 cursor-pointer'
                                   }`}
                                 >
                                   <div className="flex items-center gap-3">
-                                    <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center text-xs font-bold ${selected ? 'bg-[#F0883E] text-[#FAF7F2]' : 'bg-[#EFE9DF] text-[#8A8578]'}`}>
+                                    <div className={`w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center text-xs font-bold ${selected ? 'bg-[#2459D2] text-white' : 'bg-slate-100 text-[#64748B]'}`}>
                                       {selected ? <CheckIcon className="w-4 h-4 stroke-[3]" /> : idx + 1}
                                     </div>
                                     <div>
-                                      <div className="text-xs font-bold text-[#2B2A28]">{opt.name}</div>
-                                      <div className="text-[11px] text-[#8A8578]">{opt.famousFor || opt.category}</div>
+                                      <div className="text-xs font-bold text-[#0E2C7E]">{opt.name}</div>
+                                      <div className="text-[11px] text-[#64748B]">{opt.famousFor || opt.category}</div>
                                     </div>
                                   </div>
                                   {Number.isFinite(opt.cost) && (
-                                    <div className="text-xs font-bold text-[#F0883E]">{formatINR(opt.cost)}</div>
+                                    <div className="text-xs font-bold text-[#2459D2]">{formatINR(opt.cost)}</div>
                                   )}
                                 </button>
                               );
                             })}
                           </div>
                         ) : (
-                          <div className="text-xs text-[#8A8578] italic py-2">No destinations matching budget.</div>
+                          <div className="text-xs text-[#64748B] italic py-2">No destinations matching budget.</div>
                         )}
                       </div>
                     )}
@@ -515,21 +514,20 @@ export function TripPlanModal({ isOpen, onClose, onSave, goal, childrenCount }) 
 
               {/* Right Column (5 cols): Summary Card & Future Projection */}
               <div
-                className="lg:col-span-5 bg-[#FAF7F2] border border-[#EFE9DF] rounded-2xl sm:rounded-[32px] p-4 sm:p-8 space-y-5 sm:space-y-6 flex flex-col justify-start"
-                style={{ boxShadow: '8px 8px 20px #E5DFD3, -8px -8px 20px #FFFFFF, inset 1px 1px 2px rgba(255, 255, 255, 0.8)' }}
+                className="lg:col-span-5 glass-morphism-card rounded-2xl sm:rounded-[32px] p-4 sm:p-8 space-y-5 sm:space-y-6 flex flex-col justify-start"
               >
                 <div className="space-y-4 sm:space-y-5">
-                  <div className="text-xs font-extrabold text-[#2B2A28] border-b border-[#EFE9DF] pb-3 flex items-center gap-2">
-                    <SparklesIcon className="w-4 h-4 text-[#F0883E]" /> Trip Planning Summary
+                  <div className="text-xs font-extrabold text-[#0E2C7E] border-b border-[#77B1EC]/30 pb-3 flex items-center gap-2">
+                    <SparklesIcon className="w-4 h-4 text-[#2459D2]" /> Trip Planning Summary
                   </div>
 
                   {/* Selected Chips */}
                   <div>
-                    <label className="block text-xs font-bold text-[#8A8578] mb-2 select-none">
+                    <label className="block text-xs font-bold text-[#64748B] mb-2 select-none">
                       Selected Destinations
                     </label>
                     {tripSelectedDestinations.length === 0 ? (
-                      <div className="p-4 sm:p-5 text-center text-xs text-[#8A8578] neu-field rounded-2xl">
+                      <div className="p-4 sm:p-5 text-center text-xs text-[#64748B] neu-field rounded-2xl">
                         No destinations selected yet.
                       </div>
                     ) : (
@@ -537,17 +535,17 @@ export function TripPlanModal({ isOpen, onClose, onSave, goal, childrenCount }) 
                         {tripSelectedDestinations.map((dest) => (
                           <div
                             key={dest.id}
-                            className="bg-[#FFF6ED] border border-[#EFE9DF] text-[#F0883E] rounded-2xl px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs font-bold flex items-center gap-2 shadow-sm"
+                            className="bg-[#77B1EC]/20 border border-[#77B1EC]/40 text-[#2459D2] rounded-2xl px-3 py-1.5 sm:px-3.5 sm:py-2 text-xs font-bold flex items-center gap-2 shadow-2xs"
                           >
                             <MapPinIcon className="w-4 h-4 shrink-0" />
                             <span className="truncate max-w-[160px] sm:max-w-none">{dest.name}</span>
                             {Number.isFinite(dest.cost) && (
-                              <span className="text-[10px] text-[#8A8578] font-semibold">{formatINR(dest.cost)}/pp</span>
+                              <span className="text-[10px] text-[#64748B] font-semibold">{formatINR(dest.cost)}/pp</span>
                             )}
                             <button
                               type="button"
                               onClick={() => removeDestination(dest.id)}
-                              className="hover:text-[#E56A1F] font-extrabold cursor-pointer ml-1"
+                              className="hover:text-[#0E2C7E] font-extrabold cursor-pointer ml-1"
                             >
                               <XIcon className="w-4 h-4" />
                             </button>
@@ -559,8 +557,8 @@ export function TripPlanModal({ isOpen, onClose, onSave, goal, childrenCount }) 
 
                   {/* Target Year */}
                   <div>
-                    <label className="block text-xs font-bold text-[#2B2A28] mb-1.5 select-none flex items-center gap-1.5">
-                      <CalendarIcon className="w-4 h-4 text-[#F0883E]" /> Target Travel Year
+                    <label className="block text-xs font-bold text-[#0E2C7E] mb-1.5 select-none flex items-center gap-1.5">
+                      <CalendarIcon className="w-4 h-4 text-[#2459D2]" /> Target Travel Year
                     </label>
                     <input
                       type="number"
@@ -574,8 +572,8 @@ export function TripPlanModal({ isOpen, onClose, onSave, goal, childrenCount }) 
 
                   {/* Total Travellers count */}
                   <div>
-                    <label className="block text-xs font-bold text-[#2B2A28] mb-1.5 select-none flex items-center gap-1.5">
-                      <UserIcon className="w-4 h-4 text-[#F0883E]" /> Total Travellers
+                    <label className="block text-xs font-bold text-[#0E2C7E] mb-1.5 select-none flex items-center gap-1.5">
+                      <UserIcon className="w-4 h-4 text-[#2459D2]" /> Total Travellers
                     </label>
                     <input
                       type="number"
@@ -590,12 +588,12 @@ export function TripPlanModal({ isOpen, onClose, onSave, goal, childrenCount }) 
 
                   {/* Calculation Breakdown Box */}
                   {todaysCost ? (
-                    <div className="p-3.5 bg-[#FFF6ED] border border-[#EFE9DF] rounded-2xl text-center space-y-1 shadow-inner">
-                      <p className="text-[10px] font-bold text-[#8A8578] uppercase tracking-wider">Total Today's Cost Calculation</p>
-                      <p className="text-xs font-semibold text-[#2B2A28]">
+                    <div className="p-3.5 bg-[#77B1EC]/15 border border-[#77B1EC]/30 rounded-2xl text-center space-y-1 shadow-xs">
+                      <p className="text-[10px] font-bold text-[#64748B] uppercase tracking-wider">Total Today's Cost Calculation</p>
+                      <p className="text-xs font-semibold text-[#0E2C7E]">
                         ₹{Number(tripBudgetPerPerson || (tripSelectedDestinations[0]?.cost) || 0).toLocaleString('en-IN')} (per person) × {tripTravellers || 1} people
                       </p>
-                      <p className="text-base font-extrabold text-[#F0883E]">
+                      <p className="text-base font-extrabold text-[#2459D2]">
                         = ₹{Number(todaysCost).toLocaleString('en-IN')} Total
                       </p>
                     </div>
@@ -605,18 +603,18 @@ export function TripPlanModal({ isOpen, onClose, onSave, goal, childrenCount }) 
 
                 {/* Projected Future Cost */}
                 {projVal ? (
-                  <div className="p-4 sm:p-5 bg-[#FFF6ED] border border-[#EFE9DF] rounded-2xl text-center space-y-1 sm:space-y-1.5 shadow-inner mt-4">
-                    <p className="text-[10px] font-bold text-[#8A8578] uppercase tracking-wider">Projected Future Cost</p>
-                    <p className="text-2xl sm:text-3xl font-black text-[#2B2A28]">{formatINR(projVal)}</p>
+                  <div className="p-4 sm:p-5 bg-[#77B1EC]/20 border border-[#77B1EC]/40 rounded-2xl text-center space-y-1 sm:space-y-1.5 shadow-xs mt-4">
+                    <p className="text-[10px] font-bold text-[#64748B] uppercase tracking-wider">Projected Future Cost</p>
+                    <p className="text-2xl sm:text-3xl font-black text-[#0E2C7E]">{formatINR(projVal)}</p>
                     {sipVal && (
-                      <p className="text-xs font-semibold text-[#2B2A28]/70">
-                        Monthly SIP Needed: <span className="text-[#F0883E] font-bold">{formatINR(sipVal)}</span>
+                      <p className="text-xs font-semibold text-[#0E2C7E]/80">
+                        Monthly SIP Needed: <span className="text-[#2459D2] font-bold">{formatINR(sipVal)}</span>
                       </p>
                     )}
-                    <p className="text-xs font-medium text-[#F0883E]">For {tripTravellers || 1} travellers in {tripTargetYear}</p>
+                    <p className="text-xs font-medium text-[#2459D2]">For {tripTravellers || 1} travellers in {tripTargetYear}</p>
                   </div>
                 ) : (
-                  <div className="p-4 sm:p-5 neu-field rounded-2xl text-center text-xs text-[#8A8578] font-medium mt-4">
+                  <div className="p-4 sm:p-5 neu-field rounded-2xl text-center text-xs text-[#64748B] font-medium mt-4">
                     Select a destination and enter target year to view cost estimation.
                   </div>
                 )}
@@ -627,28 +625,28 @@ export function TripPlanModal({ isOpen, onClose, onSave, goal, childrenCount }) 
         </div>
 
         {/* Responsive Footer */}
-        <div className="shrink-0 py-3 sm:py-0 sm:h-20 px-4 sm:px-10 border-t border-[#EFE9DF] bg-[#FAF7F2] flex items-center justify-between gap-3 z-10">
-          <div className="text-xs sm:text-sm font-semibold text-[#8A8578] truncate max-w-[130px] sm:max-w-none">
+        <div className="shrink-0 py-3 sm:py-0 sm:h-20 px-4 sm:px-10 border-t border-[#77B1EC]/30 bg-white/80 flex items-center justify-between gap-3 z-10">
+          <div className="text-xs sm:text-sm font-semibold text-[#64748B] truncate max-w-[130px] sm:max-w-none">
             {todaysCost ? (
-              <span className="truncate block">Cost: <span className="text-[#F0883E] font-black text-sm sm:text-base ml-0.5">{formatINR(todaysCost)}</span></span>
+              <span className="truncate block">Cost: <span className="text-[#2459D2] font-black text-sm sm:text-base ml-0.5">{formatINR(todaysCost)}</span></span>
             ) : saveError ? (
               <span className="text-red-600 font-semibold truncate block">{saveError}</span>
             ) : (
-              <span className="text-[#8A8578] hidden sm:block">Fill in travel details to calculate.</span>
+              <span className="text-[#64748B] hidden sm:block">Fill in travel details to calculate.</span>
             )}
           </div>
           <div className="flex items-center gap-2 sm:gap-3 shrink-0 ml-auto">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 sm:px-6 py-2.5 text-xs font-bold neu-btn-flat-inactive transition-all cursor-pointer text-[#2B2A28] rounded-xl sm:rounded-2xl shrink-0"
+              className="px-4 sm:px-6 py-2.5 text-xs font-bold neu-btn-flat-inactive transition-all cursor-pointer text-[#0E2C7E] rounded-xl sm:rounded-2xl shrink-0"
             >
               Cancel
             </button>
             <button
               type="button"
               onClick={handleSave}
-              className="neu-btn-raised flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-bold px-4 sm:px-8 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl transition-all cursor-pointer whitespace-nowrap shrink-0"
+              className="glass-morphism-btn flex items-center justify-center gap-1.5 sm:gap-2 text-xs sm:text-sm font-bold px-4 sm:px-8 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl transition-all cursor-pointer whitespace-nowrap shrink-0 text-white"
             >
               Save Tour Goal <ArrowRightIcon className="w-4 h-4 shrink-0" />
             </button>

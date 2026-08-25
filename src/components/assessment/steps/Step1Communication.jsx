@@ -4,7 +4,7 @@ import { validateStep1Fields } from '../../../hooks/useFormValidation';
 import { StepNavigation } from '../../ui/StepNavigation';
 import { FormField } from '../../ui/FormField';
 
-const TEXT_DARK = '#2B2A28';
+const TEXT_DARK = '#0F172A';
 
 export function Step1Communication() {
   const {
@@ -48,10 +48,10 @@ export function Step1Communication() {
           <div className="space-y-7 w-full">
 
             <div className="space-y-2">
-              <h1 className="font-heading text-[26px] sm:text-[32px] lg:text-[34px] font-extrabold leading-tight text-[#2B2A28]">
+              <h1 className="font-heading text-[26px] sm:text-[32px] lg:text-[34px] font-black leading-tight text-[#0F172A]">
                 Communication Details
               </h1>
-              <p className="text-sm leading-relaxed max-w-lg font-normal text-[#8A8578]">
+              <p className="text-sm leading-relaxed max-w-lg font-medium text-[#475569]">
                 Provide your contact information so we can securely reach you and save your assessment details.
               </p>
             </div>
@@ -61,7 +61,7 @@ export function Step1Communication() {
 
               {/* CONTACT INFORMATION SECTION */}
               <div className="space-y-4">
-                <div className="flex items-center text-[#F0883E] font-bold text-xs uppercase tracking-wider border-l-2 border-[#F0883E] pl-2 mb-2 select-none">
+                <div className="flex items-center text-[#2459D2] font-bold text-xs uppercase tracking-wider border-l-2 border-[#2459D2] pl-2 mb-2 select-none">
                   CONTACT INFORMATION
                 </div>
 
@@ -105,7 +105,7 @@ export function Step1Communication() {
 
               {/* SPOUSE CONTACT INFORMATION SECTION */}
               <div className="space-y-4">
-                <div className="flex items-center text-[#F0883E] font-bold text-xs uppercase tracking-wider border-l-2 border-[#F0883E] pl-2 mb-2 select-none">
+                <div className="flex items-center text-[#2459D2] font-bold text-xs uppercase tracking-wider border-l-2 border-[#2459D2] pl-2 mb-2 select-none">
                   SPOUSE CONTACT INFORMATION
                 </div>
 
@@ -148,7 +148,7 @@ export function Step1Communication() {
                       className="sr-only"
                     />
                     <div
-                      className={`w-5 h-5 rounded-lg transition-all neu-checkbox flex items-center justify-center ${formData.consent ? 'bg-[#FFA500] border-[#FFA500] shadow-none' : ''
+                      className={`w-5 h-5 rounded-lg transition-all neu-checkbox flex items-center justify-center ${formData.consent ? 'bg-[#2459D2] border-[#2459D2] shadow-none' : ''
                         }`}
                     >
                       <svg
@@ -163,7 +163,7 @@ export function Step1Communication() {
                       </svg>
                     </div>
                   </div>
-                  <span className="text-xs font-semibold text-[#8A8578] leading-tight">
+                  <span className="text-xs font-semibold text-[#64748B] leading-tight">
                     I consent to share the communication details and allow contact to save this assessment.
                   </span>
                 </label>

@@ -111,22 +111,22 @@ export function GoalsTable({ calculationResult }) {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-sm font-bold text-[#E56A1F] uppercase tracking-wider flex items-center gap-2">
-        <span className="w-1.5 h-4 bg-[#ED8B36] rounded-full inline-block"></span>
+      <h3 className="text-sm font-bold text-[#2459D2] uppercase tracking-wider flex items-center gap-2">
+        <span className="w-1.5 h-4 bg-[#2459D2] rounded-full inline-block"></span>
         Goal Achievement SIP Plan (Including Retirement)
       </h3>
-      <div className="overflow-x-auto border border-[#EFE9DF] rounded-2xl neu-card-inset p-1">
+      <div className="overflow-x-auto border border-[#77B1EC]/30 rounded-2xl p-1 bg-white/50 backdrop-blur-md">
         <table className="w-full text-left border-collapse text-xs">
           <thead>
-            <tr className="border-b border-[#EFE9DF] text-[#1E2B49] font-bold">
+            <tr className="border-b border-[#77B1EC]/30 text-[#0E2C7E] font-bold">
               <th className="px-4 py-3.5">Goal Description</th>
               <th className="px-4 py-3.5 text-center">Target Year</th>
               <th className="px-4 py-3.5 text-right">Cost (Today)</th>
               <th className="px-4 py-3.5 text-right">Future Cost (Inflated)</th>
-              <th className="px-4 py-3.5 text-right text-[#ED8B36]">Monthly SIP</th>
+              <th className="px-4 py-3.5 text-right text-[#2459D2]">Monthly SIP</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#EFE9DF]/30 text-[#1C1B1A]">
+          <tbody className="divide-y divide-[#77B1EC]/20 text-[#0E2C7E]">
             {items.map((g, idx) => {
               const costDisplay = g.current_cost_display || g.current_cost || '₹0';
               const futureDisplay = g.future_cost_display || g.future_cost || '₹0';
@@ -139,13 +139,13 @@ export function GoalsTable({ calculationResult }) {
                     {costDisplay}
                   </td>
                   <td className="px-4 py-3 text-right font-medium whitespace-nowrap">{futureDisplay}</td>
-                  <td className="px-4 py-3 text-right font-bold text-[#ED8B36] whitespace-nowrap">{sipDisplay}</td>
+                  <td className="px-4 py-3 text-right font-bold text-[#2459D2] whitespace-nowrap">{sipDisplay}</td>
                 </tr>
               );
             })}
-            <tr className="bg-[#FAF7F2]/60 font-bold border-t border-[#EFE9DF]">
-              <td colSpan="4" className="px-4 py-3.5 text-right text-[#1E2B49]">Total Monthly SIP Required (All Goals)</td>
-              <td className="px-4 py-3.5 text-right text-[#ED8B36] text-sm">{totalSipDisplay}</td>
+            <tr className="bg-white/80 font-bold border-t border-[#77B1EC]/30">
+              <td colSpan="4" className="px-4 py-3.5 text-right text-[#0E2C7E]">Total Monthly SIP Required (All Goals)</td>
+              <td className="px-4 py-3.5 text-right text-[#2459D2] text-sm">{totalSipDisplay}</td>
             </tr>
           </tbody>
         </table>

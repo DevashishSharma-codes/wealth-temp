@@ -5,7 +5,7 @@ const iconStyle = {
   height: "20px",
   minWidth: "20px",
   minHeight: "20px",
-  color: "#F0883E",
+  color: "#2459D2",
   flexShrink: 0,
   display: "block"
 };

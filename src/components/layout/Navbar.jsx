@@ -11,7 +11,6 @@ export function Navbar({ onOpenContact }) {
   const location = useLocation();
 
   useEffect(() => {
-    const sections = ["services", "about", "testimonials", "contact"];
     const handleScroll = () => {
       if (window.scrollY > 20) {
         setIsScrolled(true);
@@ -24,33 +23,41 @@ export function Navbar({ onOpenContact }) {
 
       // ScrollSpy section detection for active nav highlight
       if (location.pathname === "/") {
-        let current = "home";
-        const scrollPosition = window.scrollY + 220;
+        const sectionIds = ["contact", "testimonials", "about", "assessment", "services"];
+        const sections = sectionIds
+          .map((id) => ({ id, elem: document.getElementById(id) }))
+          .filter((s) => s.elem !== null);
 
-        for (const sectionId of sections) {
-          const elem = document.getElementById(sectionId);
-          if (elem) {
-            const top = elem.offsetTop;
-            const height = elem.offsetHeight;
-            if (scrollPosition >= top && scrollPosition < top + height) {
-              current = sectionId;
-            }
+        let current = "home";
+        const viewportCenter = window.innerHeight * 0.45;
+
+        for (const s of sections) {
+          const rect = s.elem.getBoundingClientRect();
+          if (rect.top <= viewportCenter && rect.bottom >= 80) {
+            current = s.id;
+            break;
           }
         }
+
+        if (window.scrollY < 200) {
+          current = "home";
+        }
+
         setActiveSection(current);
       }
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, [location.pathname]);
 
   const navLinks = [
     { name: "Home", href: "/", id: "home" },
     { name: "Services", href: "/#services", id: "services" },
+    { name: "DIY Assessment", href: "/#assessment", id: "assessment" },
     { name: "About Us", href: "/#about", id: "about" },
     { name: "Testimonials", href: "/#testimonials", id: "testimonials" },
-    { name: "DIY Assessment", href: "/assessment" },
     { name: "Contact Support", href: "#contact", id: "contact", isAction: true },
   ];
 
@@ -71,6 +78,14 @@ export function Navbar({ onOpenContact }) {
       return;
     }
 
+    if (id === "assessment" && location.pathname === "/") {
+      const elem = document.getElementById("assessment");
+      if (elem) {
+        elem.scrollIntoView({ behavior: "smooth" });
+        return;
+      }
+    }
+
     if (href.startsWith("/#")) {
       const targetId = href.replace("/#", "");
       const elem = document.getElementById(targetId);
@@ -84,8 +99,8 @@ export function Navbar({ onOpenContact }) {
     <nav
       className={`sticky top-0 z-50 transition-all duration-300 select-none ${
         isScrolled
-          ? "bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#EFE9DF] shadow-md py-2"
-          : "bg-[#FAF7F2] border-b border-[#EFE9DF]/60 py-2.5"
+          ? "bg-white/75 backdrop-blur-2xl border-b border-white/60 shadow-[0_8px_32px_rgba(0,0,0,0.06)] py-2.5"
+          : "bg-white/55 backdrop-blur-2xl border-b border-white/40 shadow-[0_4px_20px_rgba(0,0,0,0.03)] py-3"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -100,11 +115,11 @@ export function Navbar({ onOpenContact }) {
         </Link>
 
         {/* Desktop Nav Links with Direct Smooth Sliding Active Pill */}
-        <div className="hidden lg:flex items-center gap-1.5 bg-[#FAF7F2] border border-[#EFE9DF] px-2.5 py-1.5 rounded-full shadow-[inset_2px_2px_4px_rgba(180,172,158,0.2),inset_-2px_-2px_4px_rgba(255,255,255,0.9)] relative">
+        <div className="hidden lg:flex items-center gap-1 bg-white/65 backdrop-blur-xl border border-white/80 p-1 rounded-full shadow-[0_2px_12px_rgba(0,0,0,0.04)] relative">
           {navLinks.map((link) => {
             const isActive =
               (link.id && activeSection === link.id && location.pathname === "/") ||
-              (link.href === "/assessment" && location.pathname === "/assessment");
+              (link.id === "assessment" && location.pathname === "/assessment");
 
             return (
               <a
@@ -116,8 +131,8 @@ export function Navbar({ onOpenContact }) {
                     handleNavClick(link.href, link.isAction, link.id);
                   }
                 }}
-                className={`relative px-4 py-2 rounded-full text-xs font-bold transition-colors duration-200 cursor-pointer select-none ${
-                  isActive ? "text-white" : "text-[#2B2A28] hover:text-[#ED8B36]"
+                className={`relative px-4 py-2 rounded-full text-xs font-semibold tracking-[-0.01em] transition-colors duration-200 cursor-pointer select-none ${
+                  isActive ? "text-white" : "text-slate-700 hover:text-[#2459D2]"
                 }`}
               >
                 {isActive && (
@@ -128,7 +143,7 @@ export function Navbar({ onOpenContact }) {
                       stiffness: 450,
                       damping: 35
                     }}
-                    className="absolute inset-0 bg-[#ED8B36] rounded-full shadow-xs -z-0"
+                    className="absolute inset-0 bg-[#2459D2] rounded-full shadow-[0_2px_10px_rgba(36,89,210,0.35)] -z-0"
                   />
                 )}
                 <span className="relative z-10">{link.name}</span>
@@ -139,16 +154,16 @@ export function Navbar({ onOpenContact }) {
 
         {/* Right CTA Button */}
         <div className="hidden sm:flex items-center gap-3">
-          <div className="hidden xl:inline-flex items-center gap-1.5 bg-[#FFF6ED] border border-[#F5D7C1] text-[#ED8B36] text-[11px] font-extrabold px-3 py-1.5 rounded-full uppercase tracking-wider select-none">
-            <span className="w-2 h-2 rounded-full bg-[#ED8B36] animate-pulse" />
+          <div className="hidden xl:inline-flex items-center gap-1.5 bg-white/80 border border-white text-[#2459D2] text-[11px] font-semibold px-3.5 py-1.5 rounded-full uppercase tracking-wider select-none shadow-2xs backdrop-blur-sm">
+            <span className="w-2 h-2 rounded-full bg-[#2459D2] animate-pulse" />
             <span>DIY Assessment</span>
           </div>
           <Link
             to="/assessment"
-            className="bg-[#2B2A28] hover:bg-[#403E3A] text-white px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold tracking-wide transition-all shadow-md hover:shadow-lg flex items-center gap-2 cursor-pointer active:scale-95"
+            className="glass-morphism-btn !rounded-full px-6 py-2.5 text-xs sm:text-sm font-semibold tracking-tight flex items-center gap-2 cursor-pointer shadow-md shadow-[#2459D2]/20 hover:scale-[1.02] active:scale-[0.98] transition-all"
           >
             <span>Start Assessment</span>
-            <span className="text-[#ED8B36] text-base font-extrabold">&rarr;</span>
+            <span className="text-[#BAE0FF] text-base font-bold">&rarr;</span>
           </Link>
         </div>
 
@@ -156,14 +171,14 @@ export function Navbar({ onOpenContact }) {
         <div className="flex lg:hidden items-center gap-2">
           <Link
             to="/assessment"
-            className="sm:hidden bg-[#ED8B36] text-white px-3 py-1.5 rounded-lg text-xs font-bold shadow-xs cursor-pointer"
+            className="sm:hidden glass-morphism-btn !rounded-full px-3.5 py-1.5 text-xs font-bold cursor-pointer"
           >
             Assessment &rarr;
           </Link>
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 rounded-xl text-[#2B2A28] hover:bg-[#EFE9DC] transition-colors focus:outline-none cursor-pointer"
+            className="p-2 rounded-full text-[#334155] hover:bg-white/80 transition-colors focus:outline-none cursor-pointer"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
@@ -182,7 +197,7 @@ export function Navbar({ onOpenContact }) {
 
       {/* Mobile Dropdown Navigation */}
       {isMobileMenuOpen && (
-        <div className="lg:hidden bg-[#FAF7F2] border-b border-[#EFE9DF] px-4 pt-3 pb-6 space-y-2 animate-fade-in shadow-xl">
+        <div className="lg:hidden bg-white/85 backdrop-blur-2xl border-b border-white/60 px-4 pt-3 pb-6 space-y-2 animate-fade-in shadow-xl rounded-b-3xl">
           {navLinks.map((link) => {
             const isActive =
               (link.id && activeSection === link.id && location.pathname === "/") ||
@@ -202,19 +217,19 @@ export function Navbar({ onOpenContact }) {
                 }}
                 className={`block px-4 py-2.5 rounded-xl text-sm font-bold transition-all cursor-pointer ${
                   isActive
-                    ? "bg-[#ED8B36] text-white shadow-xs"
-                    : "text-[#2B2A28] hover:bg-[#FFF6ED] hover:text-[#ED8B36]"
+                    ? "bg-[#2459D2] text-white shadow-xs"
+                    : "text-[#334155] hover:bg-[#EBF4FE] hover:text-[#2459D2]"
                 }`}
               >
                 {link.name}
               </a>
             );
           })}
-          <div className="pt-3 border-t border-[#EFE9DF]">
+          <div className="pt-3 border-t border-[#D5E5FA]">
             <Link
               to="/assessment"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full bg-[#ED8B36] hover:bg-[#E07A2E] text-white py-3 rounded-xl text-xs font-extrabold tracking-wider uppercase flex items-center justify-center gap-2 shadow-md cursor-pointer"
+              className="w-full bg-[#2459D2] hover:bg-[#183B91] text-white py-3 rounded-xl text-xs font-extrabold tracking-wider uppercase flex items-center justify-center gap-2 shadow-md cursor-pointer"
             >
               <span>Start DIY Assessment Now</span>
               <span>&rarr;</span>

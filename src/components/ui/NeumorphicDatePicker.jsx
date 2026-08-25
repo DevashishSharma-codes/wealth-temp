@@ -146,9 +146,9 @@ export function NeumorphicDatePicker({
   return (
     <div className="space-y-1.5 w-full relative" ref={containerRef}>
       {label && (
-        <label className="block text-[13px] font-bold tracking-wide text-[#2B2A28] select-none">
+        <label className="block text-[13px] font-bold tracking-wide text-[#0E2C7E] select-none">
           {label}
-          {required && <span className="text-[#F0883E] font-bold ml-0.5">*</span>}
+          {required && <span className="text-[#2459D2] font-bold ml-0.5">*</span>}
         </label>
       )}
       <div className="relative">
@@ -161,13 +161,13 @@ export function NeumorphicDatePicker({
           placeholder={placeholder}
           className={`${
             isFilled ? 'neu-field-filled' : 'neu-field'
-          } w-full px-5 py-4 text-base font-medium rounded-2xl outline-none transition-all duration-200 pr-10 cursor-pointer ${
+          } ${isOpen ? 'neu-field-active' : ''} w-full px-5 py-3.5 sm:py-4 text-base font-medium rounded-full outline-none transition-all duration-250 pr-11 cursor-pointer ${
             error ? 'border-red-400 focus:box-shadow-none' : ''
           }`}
         />
         <div 
           onClick={toggleOpen}
-          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-[#F0883E] cursor-pointer"
+          className="absolute right-4 top-1/2 -translate-y-1/2 text-[#2459D2] cursor-pointer"
         >
           <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
@@ -179,13 +179,13 @@ export function NeumorphicDatePicker({
       </div>
 
       {isOpen && (
-        <div className="absolute z-50 left-0 mt-2 p-4 w-[285px] rounded-2xl neu-card-raised text-[#2B2A28]">
-          <div className="flex items-center justify-between gap-1 pb-3 mb-2 border-b border-[#EFE9DF]">
+        <div className="absolute z-50 left-0 mt-2 p-4 w-[285px] rounded-2xl glass-morphism-card text-[#0E2C7E] shadow-xl backdrop-blur-xl bg-white/95">
+          <div className="flex items-center justify-between gap-1 pb-3 mb-2 border-b border-[#77B1EC]/30">
             <button
               type="button"
               onClick={handlePrevMonth}
               disabled={showYearGrid}
-              className="w-7 h-7 rounded-lg flex items-center justify-center neu-btn-flat-inactive font-bold text-xs cursor-pointer select-none disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-7 h-7 rounded-lg flex items-center justify-center neu-btn-flat-inactive font-bold text-xs cursor-pointer select-none disabled:opacity-30 disabled:cursor-not-allowed text-[#2459D2]"
             >
               &larr;
             </button>
@@ -194,7 +194,7 @@ export function NeumorphicDatePicker({
                 value={currentMonth}
                 onChange={handleMonthChange}
                 disabled={showYearGrid}
-                className="bg-[#FAF7F2] border border-[#EFE9DF] rounded-lg px-1.5 py-1 text-[11px] font-bold focus:outline-none cursor-pointer text-[#2B2A28] disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-white/80 border border-[#77B1EC]/40 rounded-lg px-1.5 py-1 text-[11px] font-bold focus:outline-none cursor-pointer text-[#0E2C7E] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {monthsList.map((m, idx) => (
                   <option key={m} value={idx}>{m}</option>
@@ -204,17 +204,17 @@ export function NeumorphicDatePicker({
               <button
                 type="button"
                 onClick={() => setShowYearGrid(!showYearGrid)}
-                className="bg-[#FAF7F2] border border-[#EFE9DF] rounded-lg px-2 py-1 text-[11px] font-bold focus:outline-none cursor-pointer text-[#2B2A28] hover:bg-[#F1EDE6] transition-colors flex items-center gap-0.5"
+                className="bg-white/80 border border-[#77B1EC]/40 rounded-lg px-2 py-1 text-[11px] font-bold focus:outline-none cursor-pointer text-[#0E2C7E] hover:bg-[#77B1EC]/20 transition-colors flex items-center gap-0.5"
               >
                 <span>{currentYear}</span>
-                <span className="text-[8px] text-[#F0883E]">{showYearGrid ? '▲' : '▼'}</span>
+                <span className="text-[8px] text-[#2459D2]">{showYearGrid ? '▲' : '▼'}</span>
               </button>
             </div>
             <button
               type="button"
               onClick={handleNextMonth}
               disabled={showYearGrid}
-              className="w-7 h-7 rounded-lg flex items-center justify-center neu-btn-flat-inactive font-bold text-xs cursor-pointer select-none disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-7 h-7 rounded-lg flex items-center justify-center neu-btn-flat-inactive font-bold text-xs cursor-pointer select-none disabled:opacity-30 disabled:cursor-not-allowed text-[#2459D2]"
             >
               &rarr;
             </button>
@@ -234,8 +234,8 @@ export function NeumorphicDatePicker({
                     }}
                     className={`py-1.5 text-[11px] rounded-lg font-bold transition-all cursor-pointer ${
                       selected
-                        ? 'neu-btn-flat-active'
-                        : 'text-[#2B2A28] hover:bg-[#FAF7F2] hover:shadow-[inset_2px_2px_4px_#D9D4C7,inset_-2px_-2px_4px_#FFFFFF] hover:text-[#F0883E]'
+                        ? 'glass-morphism-btn text-white'
+                        : 'text-[#0E2C7E] hover:bg-[#77B1EC]/20 hover:text-[#2459D2]'
                     }`}
                   >
                     {y}
@@ -245,7 +245,7 @@ export function NeumorphicDatePicker({
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-7 gap-1 text-center font-bold text-[10px] text-[#8A8578] mb-2 select-none">
+              <div className="grid grid-cols-7 gap-1 text-center font-bold text-[10px] text-[#64748B] mb-2 select-none">
                 {weekdays.map(day => (
                   <div key={day}>{day}</div>
                 ))}
@@ -266,8 +266,8 @@ export function NeumorphicDatePicker({
                       onClick={() => handleDateSelect(day)}
                       className={`w-8 h-8 text-[11px] rounded-lg flex items-center justify-center transition-all cursor-pointer ${
                         selected
-                          ? 'neu-btn-flat-active'
-                          : 'text-[#2B2A28] hover:bg-[#FAF7F2] hover:shadow-[inset_2px_2px_4px_#D9D4C7,inset_-2px_-2px_4px_#FFFFFF] hover:text-[#F0883E]'
+                          ? 'glass-morphism-btn text-white'
+                          : 'text-[#0E2C7E] hover:bg-[#77B1EC]/20 hover:text-[#2459D2]'
                       }`}
                     >
                       {day}

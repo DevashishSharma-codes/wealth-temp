@@ -12,27 +12,27 @@ import { StepNavigation } from '../../ui/StepNavigation';
    Raised  -> shadow bottom-right (dark) + highlight top-left (light)
    Inset   -> inner shadow top-left (dark) + inner highlight bottom-right (light)
  ------------------------------------------------------------------ */
-const SURFACE = '#F4F1EA';
-const FIELD_BG = '#F1EDE6';
-const FIELD_BORDER = '#EFE9DF';
-const SHADOW_DARK = '#D9D4C7';
+const SURFACE = '#FFFFFF';
+const FIELD_BG = 'rgba(255, 255, 255, 0.65)';
+const FIELD_BORDER = 'rgba(119, 177, 236, 0.4)';
+const SHADOW_DARK = 'rgba(180, 205, 240, 0.6)';
 const SHADOW_LIGHT = '#FFFFFF';
-const TEXT_DARK = '#2B2A28';
-const TEXT_MUTED = '#8A8578';
-const PLACEHOLDER = '#A8A094';
-const ORANGE = '#F0883E';
-const ORANGE_DARK = '#E07A2E';
-const ORANGE_GLOW = 'rgba(240,136,62,0.45)';
-const ORANGE_BORDER = 'rgba(240,136,62,0.4)';
+const TEXT_DARK = '#0F172A';
+const TEXT_MUTED = '#475569';
+const PLACEHOLDER = '#94A3B8';
+const ORANGE = '#2459D2';
+const ORANGE_DARK = '#153FA8';
+const ORANGE_GLOW = 'rgba(36, 89, 210, 0.45)';
+const ORANGE_BORDER = 'rgba(119, 177, 236, 0.6)';
 
 /* Shadow helpers */
-const neuRaised = `6px 6px 14px ${SHADOW_DARK}, -4px -4px 10px ${SHADOW_LIGHT}`;
+const neuRaised = `0 8px 24px -4px rgba(36, 89, 210, 0.12), inset 0 1.5px 2px rgba(255, 255, 255, 0.95), inset 0 0 20px 2px rgba(119, 177, 236, 0.45)`;
 const neuRaisedSoft = `4px 4px 10px ${SHADOW_DARK}, -4px -4px 10px ${SHADOW_LIGHT}`;
-const neuInsetBase = `inset 5px 5px 6px rgba(221,212,199,0.75), inset -5px -5px 6px rgba(255,255,255,1)`;
-const neuInsetSoft = `inset 3px 3px 5px rgba(221,212,199,0.75), inset -3px -3px 5px rgba(255,255,255,1)`;
+const neuInsetBase = `inset 2px 2px 5px rgba(119, 177, 236, 0.15), inset -2px -2px 5px rgba(255, 255, 255, 0.95)`;
+const neuInsetSoft = `inset 2px 2px 4px rgba(119, 177, 236, 0.15), inset -2px -2px 4px rgba(255, 255, 255, 0.95)`;
 
 const inputBase =
-  'neu-field w-full px-5 py-4 text-base font-medium rounded-2xl outline-none transition-all duration-150';
+  'neu-field w-full px-5 py-3.5 sm:py-4 text-base font-medium rounded-full outline-none transition-all duration-150';
 
 export function Step4LifestyleGoals() {
   const {
@@ -99,64 +99,85 @@ export function Step4LifestyleGoals() {
       style={{ color: TEXT_DARK }}
     >
       <style>{`
-        /* ── Inactive goal row (Figma Inset Pill) ── */
+        /* ── Inactive goal row (Bubbly Raised Pill) ── */
         .s4-root .s4-inactive-pill {
-          background: #F5F3ED !important;
-          border: 1px solid transparent !important; 
-          box-shadow: inset -3px -3px 8px rgba(255, 255, 255, 0.9), 
-                      inset 2px 2px 8px #D5D0C5 !important;
-          border-radius: 16px !important;
+          background: #EEF2F6 !important;
+          border: 1.5px solid rgba(255, 255, 255, 0.95) !important; 
+          box-shadow:
+            5px 5px 14px rgba(160, 185, 215, 0.38),
+            -5px -5px 14px #FFFFFF,
+            inset 0 1.5px 2px #FFFFFF,
+            inset 2px 2px 4px rgba(180, 205, 235, 0.25),
+            inset -2px -2px 4px #FFFFFF !important;
+          border-radius: 9999px !important;
           color: ${TEXT_DARK} !important;
         }
         
         .s4-root .s4-inactive-pill:hover {
-          /* Matches the .neu-field input hover exactly and removes orange outline */
-          border-color: transparent !important;
-          box-shadow: inset 4px 4px 6px 2px rgba(240, 136, 62, 0.45), 
-                      inset -4px -4px 6px rgba(255, 255, 255, 1) !important; 
+          background: #F8FAFC !important;
+          border-color: #FFFFFF !important;
+          box-shadow:
+            7px 7px 18px rgba(160, 185, 215, 0.48),
+            -6px -6px 18px #FFFFFF,
+            inset 0 2px 3px #FFFFFF,
+            inset 0 0 14px 2px rgba(119, 177, 236, 0.25) !important; 
+          transform: translateY(-1px);
         }
         
         .s4-root .s4-inactive-pill:active {
-          /* Deeper inset effect on click */
-          box-shadow: inset -4px -4px 10px rgba(255, 255, 255, 1), 
-                      inset 4px 4px 10px #D5D0C5 !important; 
+          box-shadow:
+            inset 3px 3px 6px #CAD5E2,
+            inset -3px -3px 6px #FFFFFF !important; 
+          transform: translateY(0);
         }
 
-        /* ── Expanded goal card (raised surface) ── */
+        /* ── Expanded goal card (Bubbly Morphism Card with Inner Shadows) ── */
         .s4-root .s4-card {
-          background: ${FIELD_BG} !important;
-          border: 1px solid ${FIELD_BORDER} !important;
-          box-shadow: ${neuRaised} !important;
+          background: linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(240, 247, 255, 0.7) 50%,
+            rgba(255, 255, 255, 0.85) 100%
+          ) !important;
+          backdrop-filter: blur(20px) saturate(180%) !important;
+          -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+          border: 1.5px solid rgba(255, 255, 255, 0.95) !important;
+          border-radius: 2rem !important;
+          box-shadow:
+            8px 12px 24px -4px rgba(160, 185, 215, 0.4),
+            -8px -8px 24px 0 #FFFFFF,
+            inset 0 2px 3px 0 #FFFFFF,
+            inset 3px 3px 6px rgba(180, 205, 235, 0.35),
+            inset -3px -3px 6px #FFFFFF,
+            inset 0 0 18px 2px rgba(119, 177, 236, 0.2) !important;
         }
 
         /* ── Close (×) button ── */
         .s4-root .s4-close-btn {
-          background: ${FIELD_BG} !important;
-          border: 1px solid ${FIELD_BORDER} !important;
-          box-shadow: 3px 3px 5px ${SHADOW_DARK}, -3px -3px 5px ${SHADOW_LIGHT} !important;
+          background: rgba(255, 255, 255, 0.6) !important;
+          border: 1px solid rgba(255, 255, 255, 0.8) !important;
+          box-shadow: 2px 2px 5px rgba(180, 205, 240, 0.35), -2px -2px 5px rgba(255, 255, 255, 0.95) !important;
           color: ${TEXT_MUTED} !important;
           transition: all 0.15s ease;
         }
         .s4-root .s4-close-btn:hover {
-          box-shadow: 4px 4px 8px ${SHADOW_DARK}, -3px -3px 6px ${SHADOW_LIGHT},
-                      0 0 10px ${ORANGE_GLOW} !important;
+          background: rgba(255, 255, 255, 0.85) !important;
+          box-shadow: 0 0 12px rgba(119, 177, 236, 0.5) !important;
           color: ${ORANGE} !important;
-          border-color: ${ORANGE_BORDER} !important;
         }
 
         /* ── "Plan Your Trip" & "Add another" & "Add Other" secondary buttons ── */
         .s4-root .s4-secondary-btn {
-          background: ${FIELD_BG} !important;
-          border: 1px solid ${FIELD_BORDER} !important;
-          box-shadow: 3px 3px 8px ${SHADOW_DARK}, -3px -3px 6px ${SHADOW_LIGHT} !important;
+          background: rgba(255, 255, 255, 0.55) !important;
+          border: 1px solid rgba(255, 255, 255, 0.8) !important;
+          box-shadow: 2px 2px 6px rgba(180, 205, 240, 0.35), -2px -2px 6px rgba(255, 255, 255, 0.95) !important;
           color: ${TEXT_DARK} !important;
           transition: all 0.15s ease;
         }
         .s4-root .s4-secondary-btn:hover {
+          background: rgba(255, 255, 255, 0.8) !important;
           color: ${ORANGE} !important;
-          border-color: ${ORANGE_BORDER} !important;
-          box-shadow: 4px 4px 10px ${SHADOW_DARK}, -3px -3px 8px ${SHADOW_LIGHT},
-                      0 0 12px ${ORANGE_GLOW} !important;
+          box-shadow: 0 0 12px rgba(119, 177, 236, 0.4) !important;
         }
         .s4-root .s4-secondary-btn:active {
           box-shadow: ${neuInsetSoft} !important;
@@ -164,7 +185,7 @@ export function Step4LifestyleGoals() {
 
         /* ── Card header divider ── */
         .s4-root .s4-card-header {
-          border-bottom: 1px solid ${FIELD_BORDER};
+          border-bottom: 1px solid rgba(119, 177, 236, 0.3);
         }
 
         /* ── Back button ── */
@@ -174,17 +195,17 @@ export function Step4LifestyleGoals() {
 
         /* ── Continue button (active) ── */
         .s4-root .s4-continue-active {
-          background: linear-gradient(145deg, ${ORANGE}, ${ORANGE_DARK}) !important;
-          box-shadow: 6px 6px 14px ${SHADOW_DARK}, -4px -4px 10px ${SHADOW_LIGHT},
-                      0 0 22px ${ORANGE_GLOW} !important;
+          background: radial-gradient(135% 135% at 50% 15%, #2459D2 0%, #153FA8 65%, #0E2C7E 100%) !important;
+          border: 1.5px solid rgba(175, 215, 255, 0.7) !important;
+          box-shadow: 0 8px 24px -4px rgba(36, 89, 210, 0.45), inset 0 1.5px 2px rgba(255, 255, 255, 0.85), inset 0 0 18px 3px rgba(119, 177, 236, 0.85) !important;
           color: #FFFFFF !important;
         }
 
         /* ── Continue button (disabled) ── */
         .s4-root .s4-continue-disabled {
-          background: #E7E3D9 !important;
-          box-shadow: 4px 4px 10px ${SHADOW_DARK}, -4px -4px 10px ${SHADOW_LIGHT} !important;
-          color: #B6B1A4 !important;
+          background: #E2E8F0 !important;
+          box-shadow: none !important;
+          color: #94A3B8 !important;
           cursor: not-allowed !important;
         }
       `}</style>
@@ -363,11 +384,11 @@ export function Step4LifestyleGoals() {
                             </div>
 
                             {/* Total Today's Cost Calculation Box */}
-                            <div className="p-3.5 bg-[#FAF7F2] border border-[#EFE9DF] rounded-2xl text-xs font-semibold text-[#2B2A28] flex flex-wrap items-center justify-between gap-2 shadow-inner">
-                              <span className="text-[#8A8578] font-bold uppercase tracking-wider text-[11px]">Calculated Total Today's Cost:</span>
+                            <div className="p-3.5 bg-[#77B1EC]/15 border border-[#77B1EC]/30 rounded-2xl text-xs font-semibold text-[#0E2C7E] flex flex-wrap items-center justify-between gap-2 shadow-xs">
+                              <span className="text-[#64748B] font-bold uppercase tracking-wider text-[11px]">Calculated Total Today's Cost:</span>
                               <div>
                                 <span>₹{(Number(goal.costPerPerson || (goal.todaysCost && goal.travellers ? Math.round(Number(goal.todaysCost) / Number(goal.travellers)) : goal.todaysCost)) || 0).toLocaleString('en-IN')} (per person) × {Number(goal.travellers || 2 + (childrenCount || 0))} people = </span>
-                                <span className="text-[#F0883E] font-extrabold text-sm ml-1">
+                                <span className="text-[#2459D2] font-extrabold text-sm ml-1">
                                   ₹{(Number(goal.todaysCost) || 0).toLocaleString('en-IN')}
                                 </span>
                               </div>
@@ -498,7 +519,7 @@ export function Step4LifestyleGoals() {
                         <GoalIcon type="Other" />
                         <span className="flex items-center gap-2">
                           {goal.goalName || goal.name || `Custom Goal #${idx + 1}`}
-                          <span className="text-[11px] font-normal text-[#8A8578] bg-[#F1EDE6] px-2.5 py-0.5 rounded-full border border-[#EFE9DF]">
+                          <span className="text-[11px] font-normal text-[#2459D2] bg-[#77B1EC]/20 px-2.5 py-0.5 rounded-full border border-[#77B1EC]/40">
                             Custom
                           </span>
                         </span>

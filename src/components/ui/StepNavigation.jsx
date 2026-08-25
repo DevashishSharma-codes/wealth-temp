@@ -14,7 +14,7 @@ export function StepNavigation({
         <button
           type="button"
           onClick={onBack}
-          className="flex items-center gap-1.5 text-sm font-bold px-2 py-2 rounded-xl transition-all active:scale-95 text-[#2B2A28] hover:text-[#F0883E] cursor-pointer"
+          className="flex items-center gap-1.5 text-sm font-bold px-2 py-2 rounded-xl transition-all active:scale-95 text-[#183B91] hover:text-[#2459D2] cursor-pointer"
         >
           &larr; Back
         </button>
@@ -23,7 +23,7 @@ export function StepNavigation({
         type="button"
         onClick={onNext}
         disabled={isDisabled || isLoading}
-        className="neu-btn-raised flex items-center gap-2 text-sm font-bold px-8 py-3.5 rounded-2xl transition-all active:scale-95 disabled:cursor-not-allowed cursor-pointer"
+        className="glass-morphism-btn flex items-center gap-2 text-sm font-bold px-8 py-3.5 rounded-2xl transition-all active:scale-95 disabled:cursor-not-allowed cursor-pointer"
       >
         {isLoading ? (
           <span className="flex items-center gap-2">
@@ -42,7 +42,7 @@ export function StepNavigation({
           type="button"
           onClick={onSkip}
           disabled={isLoading}
-          className="neu-btn-flat-inactive flex items-center justify-center text-sm font-bold px-8 py-3.5 rounded-2xl transition-all active:scale-95 hover:text-[#F0883E] cursor-pointer disabled:cursor-not-allowed"
+          className="neu-btn-flat-inactive flex items-center justify-center text-sm font-bold px-8 py-3.5 rounded-2xl transition-all active:scale-95 hover:text-[#2459D2] cursor-pointer disabled:cursor-not-allowed"
         >
           Skip Step
         </button>

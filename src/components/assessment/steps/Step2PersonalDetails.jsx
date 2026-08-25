@@ -48,10 +48,10 @@ export function Step2PersonalDetails() {
           <div className="space-y-7 w-full">
 
             <div className="space-y-2">
-              <h1 className="font-heading text-[26px] sm:text-[32px] lg:text-[34px] font-extrabold leading-tight text-[#2B2A28]">
+              <h1 className="font-heading text-[26px] sm:text-[32px] lg:text-[34px] font-black leading-tight text-[#0F172A]">
                 Personal Details
               </h1>
-              <p className="text-sm leading-relaxed max-w-lg font-normal text-[#8A8578]">
+              <p className="text-sm leading-relaxed max-w-lg font-medium text-[#475569]">
                 Help us understand your personal and professional background so we can create a retirement strategy tailored to your future goals.
               </p>
             </div>
@@ -61,7 +61,7 @@ export function Step2PersonalDetails() {
 
               {/* CLIENT INFORMATION SECTION */}
               <div className="space-y-4">
-                <div className="flex items-center text-[#F0883E] font-bold text-xs uppercase tracking-wider border-l-2 border-[#F0883E] pl-2 mb-2 select-none">
+                <div className="flex items-center text-[#2459D2] font-bold text-xs uppercase tracking-wider border-l-2 border-[#2459D2] pl-2 mb-2 select-none">
                   CLIENT INFORMATION
                 </div>
 
@@ -143,7 +143,7 @@ export function Step2PersonalDetails() {
 
               {/* SPOUSE INFORMATION SECTION */}
               <div className="space-y-4">
-                <div className="flex items-center text-[#F0883E] font-bold text-xs uppercase tracking-wider border-l-2 border-[#F0883E] pl-2 mb-2 select-none">
+                <div className="flex items-center text-[#2459D2] font-bold text-xs uppercase tracking-wider border-l-2 border-[#2459D2] pl-2 mb-2 select-none">
                   SPOUSE INFORMATION
                 </div>
 

@@ -94,23 +94,22 @@ export function CustomGoalModal({ isOpen, onClose, onAddGoal }) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#1C1B1A]/45 backdrop-blur-md transition-all duration-200"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-md transition-all duration-200"
       onClick={onClose}
       aria-modal="true"
       role="dialog"
     >
       <div
-        className="bg-[#FAF7F2] border border-[#EFE9DF] rounded-[28px] w-full max-w-[500px] p-6 sm:p-8 relative text-[#2B2A28] shadow-2xl overflow-hidden select-none animate-popup-scale"
-        style={{ boxShadow: '0 12px 48px rgba(0,0,0,0.25), 0 2px 10px rgba(0,0,0,0.12)' }}
+        className="bg-white/95 border border-[#77B1EC]/40 rounded-[28px] w-full max-w-[500px] p-6 sm:p-8 relative text-[#0E2C7E] shadow-2xl overflow-hidden select-none animate-popup-scale backdrop-blur-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between gap-3 pb-4 border-b border-[#EFE9DF]">
+        <div className="flex items-center justify-between gap-3 pb-4 border-b border-[#77B1EC]/30">
           <div>
-            <h3 className="font-heading text-lg sm:text-xl font-extrabold text-[#2B2A28] flex items-center gap-2">
-              <span className="text-[#F0883E]">🎯</span> Add Custom Goal
+            <h3 className="font-heading text-lg sm:text-xl font-extrabold text-[#0E2C7E] flex items-center gap-2">
+              <span className="text-[#2459D2]">🎯</span> Add Custom Goal
             </h3>
-            <p className="text-xs text-[#8A8578] font-medium mt-0.5">
+            <p className="text-xs text-[#64748B] font-medium mt-0.5">
               Specify your unique lifestyle goal details below
             </p>
           </div>
@@ -118,7 +117,7 @@ export function CustomGoalModal({ isOpen, onClose, onAddGoal }) {
             type="button"
             onClick={onClose}
             aria-label="Close modal"
-            className="w-8 h-8 rounded-full flex items-center justify-center bg-[#F1EDE6] border border-[#EFE9DF] text-[#8A8578] hover:text-[#F0883E] hover:border-[#F0883E]/40 text-lg font-bold transition-all cursor-pointer outline-none"
+            className="w-8 h-8 rounded-full flex items-center justify-center bg-slate-100 border border-[#77B1EC]/30 text-[#64748B] hover:text-[#2459D2] hover:border-[#2459D2]/40 text-lg font-bold transition-all cursor-pointer outline-none"
           >
             &times;
           </button>
@@ -127,7 +126,7 @@ export function CustomGoalModal({ isOpen, onClose, onAddGoal }) {
         <form onSubmit={handleSubmit} className="mt-5 space-y-4">
           {/* Preset Suggestions */}
           <div>
-            <label className="block text-[11px] font-bold text-[#8A8578] uppercase tracking-wider mb-2 select-none">
+            <label className="block text-[11px] font-bold text-[#64748B] uppercase tracking-wider mb-2 select-none">
               Quick Suggestions
             </label>
             <div className="flex flex-wrap gap-2">
@@ -140,8 +139,8 @@ export function CustomGoalModal({ isOpen, onClose, onAddGoal }) {
                     onClick={() => handlePresetClick(preset)}
                     className={`text-xs font-semibold px-3 py-1.5 rounded-xl transition-all cursor-pointer border ${
                       isSelected
-                        ? 'bg-[#F0883E] text-white border-[#F0883E] shadow-sm'
-                        : 'bg-[#F1EDE6] text-[#2B2A28] border-[#EFE9DF] hover:border-[#F0883E]/50'
+                        ? 'glass-morphism-btn text-white shadow-xs'
+                        : 'bg-slate-100/80 text-[#0E2C7E] border-[#77B1EC]/30 hover:border-[#2459D2]/50 hover:bg-[#77B1EC]/15'
                     }`}
                   >
                     {preset}
@@ -153,8 +152,8 @@ export function CustomGoalModal({ isOpen, onClose, onAddGoal }) {
 
           {/* Goal Name Input */}
           <div className="space-y-1.5">
-            <label className="block text-xs font-bold text-[#2B2A28] select-none">
-              Goal Name <span className="text-[#F0883E]">*</span>
+            <label className="block text-xs font-bold text-[#0E2C7E] select-none">
+              Goal Name <span className="text-[#2459D2]">*</span>
             </label>
             <input
               type="text"
@@ -180,8 +179,8 @@ export function CustomGoalModal({ isOpen, onClose, onAddGoal }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {/* Target Year */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-bold text-[#2B2A28] select-none">
-                Target Year <span className="text-[#F0883E]">*</span>
+              <label className="block text-xs font-bold text-[#0E2C7E] select-none">
+                Target Year <span className="text-[#2459D2]">*</span>
               </label>
               <input
                 type="number"
@@ -204,8 +203,8 @@ export function CustomGoalModal({ isOpen, onClose, onAddGoal }) {
 
             {/* Today's Cost */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-bold text-[#2B2A28] select-none">
-                Today's Cost (₹) <span className="text-[#F0883E]">*</span>
+              <label className="block text-xs font-bold text-[#0E2C7E] select-none">
+                Today's Cost (₹) <span className="text-[#2459D2]">*</span>
               </label>
               <input
                 type="number"
@@ -220,7 +219,7 @@ export function CustomGoalModal({ isOpen, onClose, onAddGoal }) {
                 }`}
               />
               {formattedCost && (
-                <span className="text-xs text-[#F0883E] font-bold block mt-1">
+                <span className="text-xs text-[#2459D2] font-bold block mt-1">
                   {formattedCost}
                 </span>
               )}
@@ -237,18 +236,14 @@ export function CustomGoalModal({ isOpen, onClose, onAddGoal }) {
             <button
               type="button"
               onClick={onClose}
-              className="px-5 py-3 text-xs font-bold text-[#8A8578] hover:text-[#2B2A28] transition-colors rounded-2xl cursor-pointer"
+              className="px-5 py-3 text-xs font-bold text-[#64748B] hover:text-[#0E2C7E] transition-colors rounded-2xl cursor-pointer"
             >
               Cancel
             </button>
 
             <button
               type="submit"
-              className="px-6 py-3 text-xs font-bold text-white rounded-2xl transition-all active:scale-95 cursor-pointer shadow-md"
-              style={{
-                background: 'linear-gradient(145deg, #F0883E, #E07A2E)',
-                boxShadow: '4px 4px 10px #D9D4C7, -2px -2px 6px #FFFFFF, 0 0 14px rgba(240,136,62,0.4)',
-              }}
+              className="glass-morphism-btn px-6 py-3 text-xs font-bold text-white rounded-2xl transition-all active:scale-95 cursor-pointer shadow-md"
             >
               + Add Goal
             </button>

@@ -47,10 +47,10 @@ export function Step5RetirementSavings() {
           <div className="space-y-7 w-full">
             
             <div className="space-y-2">
-              <h1 className="font-heading text-[26px] sm:text-[32px] lg:text-[34px] font-extrabold leading-tight text-[#2B2A28]">
+              <h1 className="font-heading text-[26px] sm:text-[32px] lg:text-[34px] font-black leading-tight text-[#0F172A]">
                 Current Retirement Savings
               </h1>
-              <p className="text-sm leading-relaxed max-w-lg font-normal text-[#8A8578]">
+              <p className="text-sm leading-relaxed max-w-lg font-medium text-[#475569]">
                 Tell us about your existing retirement savings and employer-sponsored plans so we can accurately assess your future retirement readiness.
               </p>
             </div>
@@ -99,7 +99,7 @@ export function Step5RetirementSavings() {
 
               {/* EPF Section */}
               <div className="space-y-4 pt-4">
-                <div className="flex items-center text-[#F0883E] font-bold text-xs uppercase tracking-wider border-l-2 border-[#F0883E] pl-2 mb-2 select-none">
+                <div className="flex items-center text-[#2459D2] font-bold text-xs uppercase tracking-wider border-l-2 border-[#2459D2] pl-2 mb-2 select-none">
                   EMPLOYEES' PROVIDENT FUND (EPF)
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -141,7 +141,7 @@ export function Step5RetirementSavings() {
 
               {/* NPS Section */}
               <div className="space-y-4 pt-4">
-                <div className="flex items-center text-[#F0883E] font-bold text-xs uppercase tracking-wider border-l-2 border-[#F0883E] pl-2 mb-2 select-none">
+                <div className="flex items-center text-[#2459D2] font-bold text-xs uppercase tracking-wider border-l-2 border-[#2459D2] pl-2 mb-2 select-none">
                   NATIONAL PENSION SYSTEM (NPS)
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -183,7 +183,7 @@ export function Step5RetirementSavings() {
 
               {/* Superannuation Section */}
               <div className="space-y-4 pt-4">
-                <div className="flex items-center text-[#F0883E] font-bold text-xs uppercase tracking-wider border-l-2 border-[#F0883E] pl-2 mb-2 select-none">
+                <div className="flex items-center text-[#2459D2] font-bold text-xs uppercase tracking-wider border-l-2 border-[#2459D2] pl-2 mb-2 select-none">
                   SUPERANNUATION FUND
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">

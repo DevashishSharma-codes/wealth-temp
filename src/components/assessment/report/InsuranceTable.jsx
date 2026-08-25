@@ -38,14 +38,14 @@ export function InsuranceTable({ calculationResult }) {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-sm font-bold text-[#E56A1F] uppercase tracking-wider flex items-center gap-2">
-        <span className="w-1.5 h-4 bg-[#ED8B36] rounded-full inline-block"></span>
+      <h3 className="text-sm font-bold text-[#2459D2] uppercase tracking-wider flex items-center gap-2">
+        <span className="w-1.5 h-4 bg-[#2459D2] rounded-full inline-block"></span>
         Risk Protection & Insurance Needs
       </h3>
-      <div className="overflow-x-auto border border-[#EFE9DF] rounded-2xl neu-card-inset p-1">
+      <div className="overflow-x-auto border border-[#77B1EC]/30 rounded-2xl p-1 bg-white/50 backdrop-blur-md">
         <table className="w-full text-left border-collapse text-xs">
           <thead>
-            <tr className="border-b border-[#EFE9DF] text-[#1E2B49] font-bold">
+            <tr className="border-b border-[#77B1EC]/30 text-[#0E2C7E] font-bold">
               <th className="px-4 py-3.5">Insurance Need Type</th>
               <th className="px-4 py-3.5 text-center">Duration</th>
               <th className="px-4 py-3.5 text-right">Required Cover</th>
@@ -53,7 +53,7 @@ export function InsuranceTable({ calculationResult }) {
               <th className="px-4 py-3.5 text-right">Present Value (PV)</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#EFE9DF]/30 text-[#1C1B1A]">
+          <tbody className="divide-y divide-[#77B1EC]/20 text-[#0E2C7E]">
             {calculationResult.insurance.items.map((ins, idx) => (
               <tr key={idx} className="bg-white/60 hover:bg-white/90 transition-colors">
                 <td className="px-4 py-3 font-semibold">{ins.need}</td>
@@ -61,7 +61,7 @@ export function InsuranceTable({ calculationResult }) {
                 <td className="px-4 py-3 text-right font-medium whitespace-nowrap">{formatInrFullString(ins.amount)}</td>
                 <td className="px-4 py-3 text-center whitespace-nowrap min-w-[130px]" style={{ minWidth: '130px' }}>
                   <span
-                    className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-orange-50 text-[#ED8B36] border border-orange-100 font-sans inline-flex items-center justify-center"
+                    className="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#77B1EC]/20 text-[#2459D2] border border-[#77B1EC]/40 font-sans inline-flex items-center justify-center"
                     style={{ whiteSpace: 'nowrap', display: 'inline-flex' }}
                   >
                     {ins.type}
@@ -70,9 +70,9 @@ export function InsuranceTable({ calculationResult }) {
                 <td className="px-4 py-3 text-right font-bold whitespace-nowrap">{formatInrFullString(ins.pv)}</td>
               </tr>
             ))}
-            <tr className="bg-[#FAF7F2]/60 font-bold border-t border-[#EFE9DF]">
-              <td colSpan="4" className="px-4 py-3.5 text-right text-[#1E2B49]">Total Life Coverage Recommended</td>
-              <td className="px-4 py-3.5 text-right text-sm text-[#1E2B49]">{formatInrFullString(calculationResult.insurance.total_required)}</td>
+            <tr className="bg-white/80 font-bold border-t border-[#77B1EC]/30">
+              <td colSpan="4" className="px-4 py-3.5 text-right text-[#0E2C7E]">Total Life Coverage Recommended</td>
+              <td className="px-4 py-3.5 text-right text-sm text-[#0E2C7E]">{formatInrFullString(calculationResult.insurance.total_required)}</td>
             </tr>
           </tbody>
         </table>

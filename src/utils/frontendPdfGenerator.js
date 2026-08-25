@@ -138,7 +138,7 @@ export async function generateFullFrontendPdf(containerElement, filename = 'weal
       useCORS: true,
       allowTaint: true,
       logging: false,
-      backgroundColor: '#ffffff',
+      backgroundColor: null,
       width: 595,
       height: 842,
       onclone: (clonedDoc) => {

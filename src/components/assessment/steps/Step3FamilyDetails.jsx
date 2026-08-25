@@ -122,21 +122,21 @@ export function Step3FamilyDetails() {
           <div className="space-y-7 w-full">
             
             <div className="space-y-2">
-              <h1 className="font-heading text-[26px] sm:text-[32px] lg:text-[34px] font-extrabold leading-tight text-[#2B2A28]">
+              <h1 className="font-heading text-[26px] sm:text-[32px] lg:text-[34px] font-black leading-tight text-[#0F172A]">
                 Family Details
               </h1>
-              <p className="text-sm leading-relaxed max-w-lg font-normal text-[#8A8578]">
+              <p className="text-sm leading-relaxed max-w-lg font-medium text-[#475569]">
                 Help us understand your family structure and financial responsibilities so we can build a retirement strategy that protects your family.
               </p>
             </div>
 
             {/* Number of Children selector */}
-            <div className="neu-card-inset p-5 sm:p-6 rounded-[24px] space-y-5 border border-[#EFE9DF]/50 bg-white/20 backdrop-blur-sm">
+            <div className="glass-morphism-card p-5 sm:p-6 rounded-[24px] space-y-5">
               <div className="space-y-1.5">
-                <label className="block text-[15px] sm:text-base font-extrabold text-[#2B2A28] tracking-wide select-none">
-                  Number of Children <span className="text-[#8A8578] font-medium text-[13px] ml-1">(optional)</span>
+                <label className="block text-[15px] sm:text-base font-black text-[#0F172A] tracking-wide select-none">
+                  Number of Children <span className="text-[#64748B] font-medium text-[13px] ml-1">(optional)</span>
                 </label>
-                <p className="text-[#8A8578] text-xs sm:text-[13px] font-medium leading-relaxed">
+                <p className="text-[#475569] text-xs sm:text-[13px] font-medium leading-relaxed">
                   Select the number of dependent children to plan for their education, marriage, and other key milestones.
                 </p>
               </div>
@@ -152,8 +152,8 @@ export function Step3FamilyDetails() {
                       onClick={() => setChildrenCount(parsedNum)}
                       className={`flex-1 min-w-[60px] h-12 sm:h-14 rounded-[1.25rem] text-sm sm:text-base font-bold transition-all duration-200 cursor-pointer flex items-center justify-center ${
                         isSelected 
-                          ? 'neu-btn-raised scale-[0.98]' 
-                          : 'bg-[#F1EDE6] shadow-[inset_4px_4px_6px_rgba(221,212,199,0.75),_inset_-4px_-4px_6px_rgba(255,255,255,1)] text-[#8A8578] hover:text-[#F0883E] hover:shadow-[inset_4px_4px_6px_2px_rgba(240,136,62,0.45),_inset_-4px_-4px_6px_rgba(255,255,255,1)]'
+                          ? 'glass-morphism-btn scale-[0.98]' 
+                          : 'neu-btn-flat-inactive rounded-[1.25rem]'
                       }`}
                     >
                       {num}
@@ -164,12 +164,12 @@ export function Step3FamilyDetails() {
 
               {/* Show controls to add more children if childrenCount is 4 or more */}
               {childrenCount >= 4 && (
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 mt-2 border-t border-[#EFE9DF] animate-fade-in">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 mt-2 border-t border-[#77B1EC]/30 animate-fade-in">
                   <div className="flex items-center gap-3">
-                    <span className="text-[13px] font-bold text-[#8A8578] uppercase tracking-wider select-none">
+                    <span className="text-[13px] font-bold text-[#64748B] uppercase tracking-wider select-none">
                       Total Children
                     </span>
-                    <span className="flex items-center justify-center neu-btn-raised w-8 h-8 rounded-full font-extrabold text-sm">
+                    <span className="flex items-center justify-center glass-morphism-btn w-8 h-8 rounded-full font-extrabold text-sm text-white">
                       {childrenCount}
                     </span>
                   </div>
@@ -178,7 +178,7 @@ export function Step3FamilyDetails() {
                     <button
                       type="button"
                       onClick={() => setChildrenCount(childrenCount + 1)}
-                      className="flex-1 sm:flex-none px-4 h-10 rounded-xl text-[13px] font-bold neu-btn-flat-inactive flex items-center justify-center hover:text-[#F0883E] cursor-pointer whitespace-nowrap transition-all"
+                      className="flex-1 sm:flex-none px-4 h-10 rounded-xl text-[13px] font-bold neu-btn-flat-inactive flex items-center justify-center hover:text-[#2459D2] cursor-pointer whitespace-nowrap transition-all"
                     >
                       + Add More
                     </button>
@@ -203,13 +203,13 @@ export function Step3FamilyDetails() {
                   { id: Date.now() + Math.random(), goalType: child.goalType || '', targetYear: child.targetYear || '', todaysCost: child.todaysCost || '' }
                 ];
                 return (
-                  <div key={i} className="space-y-8 border-b border-[#EFE9DF] pb-8 last:border-b-0 last:pb-0 pt-4">
+                  <div key={i} className="space-y-8 border-b border-[#77B1EC]/30 pb-8 last:border-b-0 last:pb-0 pt-4">
                     
-                    {/* CHILD X INFORMATION CONTAINER - ORANGISH/WHITISH NEUMORPHIC CARD */}
-                    <div className="neu-card-orange-classic p-5 sm:p-6 rounded-[24px] space-y-6">
+                    {/* CHILD X INFORMATION CONTAINER - GLASSY MORPHISM CARD */}
+                    <div className="glass-morphism-card p-5 sm:p-6 rounded-[24px] space-y-6">
                       
                       {/* CHILD X INFORMATION HEADER */}
-                      <div className="text-[#F0883E] font-bold text-xs uppercase tracking-wider select-none neu-text-embossed">
+                      <div className="text-[#2459D2] font-bold text-xs uppercase tracking-wider select-none">
                         CHILD {i + 1} INFORMATION
                       </div>
 
@@ -228,8 +228,8 @@ export function Step3FamilyDetails() {
                       {/* Dependent & DOB Row */}
                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                         <div className="space-y-1.5 w-full">
-                          <label className="block text-[13px] font-bold text-[#2B2A28] tracking-wide select-none">
-                            Financially Dependent?<span className="text-[#F0883E] font-bold ml-0.5">*</span>
+                          <label className="block text-[13px] font-bold text-[#0E2C7E] tracking-wide select-none">
+                            Financially Dependent?<span className="text-[#2459D2] font-bold ml-0.5">*</span>
                           </label>
                           <div className="grid grid-cols-2 gap-3">
                             {['Yes', 'No'].map((opt) => (
@@ -238,7 +238,7 @@ export function Step3FamilyDetails() {
                                 type="button"
                                 onClick={() => handleChildInputChange(i, 'dependent', opt)}
                                 className={`py-3.5 rounded-2xl text-xs font-bold transition-all cursor-pointer ${
-                                  child.dependent === opt ? 'neu-btn-flat-active' : 'neu-btn-flat-inactive'
+                                  child.dependent === opt ? 'glass-morphism-btn text-white' : 'bg-white/60 text-[#64748B] border border-[#77B1EC]/30'
                                 }`}
                               >
                                 {opt}
@@ -260,15 +260,15 @@ export function Step3FamilyDetails() {
 
                       {/* Calculated Age */}
                       <div className="space-y-1.5 w-full">
-                        <label className="block text-[13px] font-bold text-[#2B2A28] tracking-wide select-none">
-                          Calculated Age<span className="text-[#F0883E] font-bold ml-0.5">*</span>
+                        <label className="block text-[13px] font-bold text-[#0E2C7E] tracking-wide select-none">
+                          Calculated Age<span className="text-[#2459D2] font-bold ml-0.5">*</span>
                         </label>
                         <input 
                           type="text"
                           value={child.age || ''}
                           readOnly
                           placeholder="Calculated age here"
-                          className="neu-field w-full px-4 py-3.5 text-sm font-semibold rounded-2xl outline-none transition-all duration-150 text-[#8A8578] cursor-not-allowed"
+                          className="neu-field w-full px-4 py-3.5 text-sm font-semibold rounded-2xl outline-none transition-all duration-150 text-[#64748B] cursor-not-allowed"
                         />
                       </div>
 
@@ -277,10 +277,10 @@ export function Step3FamilyDetails() {
                     {/* CHILD X GOALS CONTAINER WITH BRACKET CONNECTOR */}
                     <div className="relative pl-6 sm:pl-7 ml-1 sm:ml-2 space-y-6">
                       {/* Left bracket connector */}
-                      <div className="absolute left-0 top-1 bottom-1 w-[14px] border-l-[3px] border-t-[3px] border-b-[3px] border-[#F0883E] rounded-l-xl select-none pointer-events-none" />
+                      <div className="absolute left-0 top-1 bottom-1 w-[14px] border-l-[3px] border-t-[3px] border-b-[3px] border-[#2459D2] rounded-l-xl select-none pointer-events-none" />
                       
                       {/* CHILD X GOALS HEADER */}
-                      <div className="text-[#F0883E] font-bold text-xs uppercase tracking-wider select-none neu-text-embossed">
+                      <div className="text-[#2459D2] font-bold text-xs uppercase tracking-wider select-none">
                         CHILD {i + 1} GOALS
                       </div>
 
@@ -292,7 +292,7 @@ export function Step3FamilyDetails() {
                           const hasTodaysCostErr = errors[i]?.goals?.[gIdx]?.todaysCost;
 
                           return (
-                            <div key={gIdx} className="space-y-4 neu-card-inset p-5 rounded-[24px] relative pt-6">
+                            <div key={gIdx} className="space-y-4 glass-morphism-card p-5 rounded-[24px] relative pt-6">
                               {goalsList.length > 1 && (
                                 <button
                                   type="button"
@@ -303,26 +303,26 @@ export function Step3FamilyDetails() {
                                 </button>
                               )}
 
-                              <div className="text-[11px] font-bold text-[#8A8578] uppercase tracking-wider select-none mb-1">
+                              <div className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider select-none mb-1">
                                 Goal #{gIdx + 1}
                               </div>
 
                               {/* Goal Type */}
                               <div className="space-y-1.5 w-full">
-                                <label className="block text-[13px] font-bold text-[#2B2A28] tracking-wide select-none">
-                                  Goal Type<span className="text-[#F0883E] font-bold ml-0.5">*</span>
+                                <label className="block text-[13px] font-bold text-[#0E2C7E] tracking-wide select-none">
+                                  Goal Type<span className="text-[#2459D2] font-bold ml-0.5">*</span>
                                 </label>
                                 <button
                                   type="button"
                                   onClick={() => setActiveGoalTypeTarget({ childIndex: i, goalIndex: gIdx })}
                                   className={`${
                                     g.goalType ? 'neu-field-filled' : 'neu-field'
-                                  } w-full px-5 py-4 pr-10 text-base font-semibold rounded-2xl outline-none transition-all duration-200 text-left flex justify-between items-center cursor-pointer hover:border-[#F0883E]/50 ${
+                                  } w-full px-5 py-4 pr-10 text-base font-semibold rounded-2xl outline-none transition-all duration-200 text-left flex justify-between items-center cursor-pointer hover:border-[#2459D2]/50 ${
                                     (touched[`${i}-goals-${gIdx}-goalType`] || showAllErrors) && hasGoalTypeErr ? 'border-red-400' : ''
                                   }`}
                                 >
-                                  <span className={g.goalType ? 'text-[#2B2A28]' : 'text-[#8A8578]'}>{g.goalType || 'Select an option'}</span>
-                                  <svg className="w-4.5 h-4.5 text-[#F0883E] shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                  <span className={g.goalType ? 'text-[#0E2C7E]' : 'text-[#64748B]'}>{g.goalType || 'Select an option'}</span>
+                                  <svg className="w-4.5 h-4.5 text-[#2459D2] shrink-0" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                                   </svg>
                                 </button>
@@ -376,7 +376,7 @@ export function Step3FamilyDetails() {
                                   <a 
                                     href="#education-plan"
                                     onClick={(e) => { e.preventDefault(); openEducationModal(i, gIdx); }}
-                                    className="text-[#F0883E] text-xs font-bold hover:underline inline-flex items-center gap-1.5 transition-all select-none"
+                                    className="text-[#2459D2] text-xs font-bold hover:underline inline-flex items-center gap-1.5 transition-all select-none"
                                   >
                                     Plan with Dream Colleges / Budget Calculator
                                     <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -396,7 +396,7 @@ export function Step3FamilyDetails() {
                         <button 
                           type="button"
                           onClick={() => handleAddGoalToChild(i)}
-                          className="neu-btn-flat-inactive text-xs font-bold px-4 py-2.5 rounded-2xl hover:text-[#F0883E] transition-all cursor-pointer"
+                          className="neu-btn-flat-inactive text-xs font-bold px-4 py-2.5 rounded-2xl hover:text-[#2459D2] transition-all cursor-pointer"
                         >
                           + Add Another Goal
                         </button>
@@ -415,7 +415,7 @@ export function Step3FamilyDetails() {
                 <button
                   type="button"
                   onClick={() => setChildrenCount(childrenCount + 1)}
-                  className="neu-btn-flat-active px-5 py-3.5 rounded-2xl text-xs font-bold flex items-center gap-1.5 hover:shadow-md hover:translate-y-[-1px] active:translate-y-0 transition-all cursor-pointer"
+                  className="glass-morphism-btn px-5 py-3.5 rounded-2xl text-xs font-bold flex items-center gap-1.5 hover:shadow-md hover:translate-y-[-1px] active:translate-y-0 transition-all cursor-pointer text-white"
                 >
                   <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />

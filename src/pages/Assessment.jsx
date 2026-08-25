@@ -43,7 +43,15 @@ export default function Assessment() {
   }, [step, showReport]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F4F1EA] font-sans selection:bg-brand-gold/30 selection:text-brand-blue relative">
+    <div 
+      className="min-h-screen flex flex-col font-sans selection:bg-[#2459D2]/20 selection:text-[#183B91] relative overflow-hidden text-[#0F172A]"
+      style={{
+        background: 'linear-gradient(180deg, #E6EFF8 0%, #EEF2F6 25%, #EEF2F6 100%)'
+      }}
+    >
+      {/* Soft subtle ambient depth */}
+      <div className="absolute top-[-100px] left-1/2 -translate-x-1/2 w-[1000px] h-[450px] bg-white/40 rounded-full blur-[100px] pointer-events-none -z-0" />
+      <div className="absolute top-[100px] right-[-100px] w-[500px] h-[350px] bg-[#77B1EC]/8 rounded-full blur-[100px] pointer-events-none -z-0" />
       
       <div className="absolute top-4 left-4 sm:top-6 sm:left-6 z-50">
         <button
@@ -53,14 +61,9 @@ export default function Assessment() {
             localStorage.removeItem("ww_assessment_id");
             window.location.href = "/";
           }}
-          className="flex items-center gap-2 px-4 py-2.5 rounded-2xl transition-all text-xs sm:text-sm font-bold cursor-pointer hover:opacity-80"
-          style={{
-            background: "#F5F3ED",
-            color: "#7B7B7B",
-            boxShadow: "inset 4px 4px 6px rgba(212,196,176,0.8), inset -4px -4px 6px rgba(255,255,255,1)",
-          }}
+          className="flex items-center gap-2 px-4 py-2.5 rounded-2xl transition-all text-xs sm:text-sm font-bold cursor-pointer glass-morphism-card text-[#0E2C7E] hover:text-[#2459D2]"
         >
-          <svg className="w-4 h-4 text-[#ED8B36]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <svg className="w-4 h-4 text-[#2459D2]" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path strokeLinecap="round" strokeLinejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
           </svg>
           Go to Home Page

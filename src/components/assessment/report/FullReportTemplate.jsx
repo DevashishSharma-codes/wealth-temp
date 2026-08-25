@@ -304,7 +304,7 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
     if (t.includes('birth') || t.includes('baby')) return '/assets/report/real_3d_child_birth.png';
     if (t.includes('big') || t.includes('purchase')) return '/assets/report/real_3d_big_purchases.png';
     if (t.includes('estate')) return '/assets/report/real_3d_estate_for_children.png';
-    if (t.includes('post') || t.includes('master')) return '/assets/report/real_3d_post_graduation.png';
+    if (t.includes('post') || t.includes('master') || t.includes('career')) return '/assets/report/real_3d_post_graduation.png';
     if (t.includes('graduation') || t.includes('education') || t.includes('studies') || t.includes('college') || t.includes('school')) return '/assets/report/real_3d_child_graduation.png';
     if (t.includes('marriage') || t.includes('wedding')) return '/assets/report/real_3d_child_marriage.png';
     if (t.includes('child')) return '/assets/report/real_3d_child_other.png';
@@ -785,7 +785,7 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
         color: '#1c1b1a',
       }}
     >
-      {/* PAGE 1: COVER PAGE (100% Pure Dynamic React HTML/CSS/SVG - No Background PNG, Zero Artifacts) */}
+      {/* PAGE 1: COVER PAGE (100% Exact Visual Replica of Reference Image) */}
       <div
         className="report-page"
         style={{
@@ -802,17 +802,27 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
           breakAfter: 'page',
         }}
       >
-        {/* 1. Pure SVG Vector Background Shapes */}
+        {/* 1. Pure SVG Vector Background Shapes - Mathematically Precise Parallel Geometry */}
         <svg
           style={{ position: 'absolute', top: 0, left: 0, width: '595px', height: '842px', zIndex: 1 }}
           viewBox="0 0 595 842"
         >
-          {/* Top-Left Dark Navy Corner Slice */}
-          <polygon points="0,0 200,0 0,310" fill="#001a66" />
-          {/* Bottom-Right Vibrant Orange Diagonal Ribbon */}
-          <polygon points="595,180 595,842 120,842" fill="#ff8c32" />
-          {/* Bottom-Right Dark Navy Corner Accent */}
-          <polygon points="595,540 595,842 360,842" fill="#001a66" />
+          {/* Base Page Canvas */}
+          <rect width="595" height="842" fill="#ffffff" />
+
+          {/* TOP-LEFT LAYER 1: Cerulean Blue Wedge (#01569e) */}
+          <polygon points="0,0 169,0 0,220" fill="#01569e" />
+          {/* TOP-LEFT LAYER 2: Deep Classic Navy Slice (#00297c) */}
+          <polygon points="0,0 92,0 0,120" fill="#00297c" />
+
+          {/* BOTTOM-RIGHT LAYER 1: Parallel Light Grey Diagonal Stripe (#efefef) */}
+          <polygon points="595,186 595,266 152,842 91,842" fill="#efefef" />
+
+          {/* BOTTOM-RIGHT LAYER 2: Main Cerulean Blue Diagonal Band (#01569e) */}
+          <polygon points="595,266 595,646 445,842 152,842" fill="#01569e" />
+
+          {/* BOTTOM-RIGHT LAYER 3: Corner Deep Classic Navy Wedge (#00297c) */}
+          <polygon points="595,646 595,842 445,842" fill="#00297c" />
         </svg>
 
         {/* 2. Top-Right Wealth Wisdom Crest Logo */}
@@ -825,15 +835,15 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
           />
         </div>
 
-        {/* 3. Dynamic Client Text Block (Pure White Background Space: top=230px, left=75px) */}
-        <div style={{ position: 'absolute', top: '230px', left: '75px', width: '310px', zIndex: 10 }}>
+        {/* 3. Dynamic Client Text Block */}
+        <div style={{ position: 'absolute', top: '220px', left: '55px', width: '330px', zIndex: 10 }}>
           <h2
             style={{
-              fontSize: '24px',
+              fontSize: '23px',
               fontWeight: 800,
               fontStyle: 'italic',
-              color: '#002b80',
-              margin: '0 0 14px 0',
+              color: '#01569e',
+              margin: '0 0 10px 0',
               letterSpacing: '-0.01em',
               whiteSpace: 'nowrap',
             }}
@@ -842,50 +852,36 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
           </h2>
           <h1
             style={{
-              fontSize: '38px',
+              fontSize: '44px',
               fontWeight: 900,
               fontStyle: 'italic',
-              color: '#002b80',
+              color: '#000000',
               margin: '0 0 16px 0',
               lineHeight: 1.1,
               wordBreak: 'break-word',
-              maxWidth: '300px',
+              maxWidth: '320px',
+              letterSpacing: '-0.02em',
             }}
           >
             {clientName}
           </h1>
-          <div style={{ fontSize: '13px', fontWeight: 600, color: '#475569', whiteSpace: 'nowrap' }}>
+          <div style={{ fontSize: '12.5px', fontWeight: 600, color: '#64748b', whiteSpace: 'nowrap' }}>
             Generated on: {reportDate}
           </div>
         </div>
 
-        {/* 4. Dark Navy Blue Crescent Accent Ring (Wrapped around bottom-right of circular photo) */}
+        {/* 4. Circular Photo Frame with Thick White Border */}
         <div
           style={{
             position: 'absolute',
-            bottom: '30px',
-            right: '20px',
-            width: '370px',
-            height: '370px',
-            borderRadius: '50%',
-            border: '14px solid #001a66',
-            zIndex: 4,
-            boxSizing: 'border-box',
-          }}
-        />
-
-        {/* 5. Circular Photo Frame (Brand New Photorealistic Gemini Photo - Zero Bleeding, Real People, No 2024 Numbers) */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '45px',
-            right: '35px',
-            width: '340px',
-            height: '340px',
+            bottom: '35px',
+            right: '25px',
+            width: '360px',
+            height: '360px',
             borderRadius: '50%',
             overflow: 'hidden',
-            border: '6px solid #ffffff',
-            boxShadow: '0 12px 32px rgba(0, 43, 128, 0.20)',
+            border: '10px solid #ffffff',
+            boxShadow: '0 14px 36px rgba(0, 41, 124, 0.22)',
             zIndex: 5,
             backgroundColor: '#ffffff',
           }}
@@ -1001,7 +997,7 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
                       position: 'relative',
                       width: '215px',
                       backgroundColor: '#ffffff',
-                      border: '3px solid #001a66',
+                      border: '3px solid #0E2C7E',
                       borderLeft: 'none',
                       borderRadius: '0 50px 50px 0',
                       padding: '12px 20px 12px 58px',
@@ -1009,10 +1005,10 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
                       boxSizing: 'border-box',
                     }}
                   >
-                    <div style={{ fontSize: '16px', color: '#ff8c32', fontWeight: 600, lineHeight: 1.1 }}>
+                    <div style={{ fontSize: '16px', color: '#2459D2', fontWeight: 700, lineHeight: 1.1 }}>
                       Target Year
                     </div>
-                    <div style={{ fontSize: '32px', fontWeight: 900, color: '#ff8c32', marginTop: '4px', lineHeight: 1.1 }}>
+                    <div style={{ fontSize: '32px', fontWeight: 900, color: '#0E2C7E', marginTop: '4px', lineHeight: 1.1 }}>
                       {targetYear}
                     </div>
                   </div>
@@ -1069,17 +1065,17 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
                   {/* Current Cost Pill */}
                   <div
                     style={{
-                      border: '3px solid #001a66',
+                      border: '3px solid #0E2C7E',
                       borderRadius: '24px',
                       padding: '14px 20px',
                       textAlign: 'center',
                       backgroundColor: '#ffffff',
                     }}
                   >
-                    <div style={{ fontSize: '15px', color: '#ff8c32', fontWeight: 600 }}>
+                    <div style={{ fontSize: '15px', color: '#2459D2', fontWeight: 700 }}>
                       {isTourGoal ? "Current Total Cost" : isEducation ? "Approx. Current Cost" : "Current Cost"}
                     </div>
-                    <div style={{ fontSize: '26px', fontWeight: 900, color: '#ff8c32', marginTop: '2px' }}>
+                    <div style={{ fontSize: '26px', fontWeight: 900, color: '#0E2C7E', marginTop: '2px' }}>
                       {isTourGoal ? tourTotalCost : currentCost}
                     </div>
                   </div>
@@ -1087,15 +1083,15 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
                   {/* Future Cost Pill */}
                   <div
                     style={{
-                      border: '3px solid #001a66',
+                      border: '3px solid #0E2C7E',
                       borderRadius: '24px',
                       padding: '14px 20px',
                       textAlign: 'center',
                       backgroundColor: '#ffffff',
                     }}
                   >
-                    <div style={{ fontSize: '16px', color: '#ff8c32', fontWeight: 600 }}>Future Cost</div>
-                    <div style={{ fontSize: '26px', fontWeight: 900, color: '#ff8c32', marginTop: '2px' }}>{futureCost}</div>
+                    <div style={{ fontSize: '16px', color: '#2459D2', fontWeight: 700 }}>Future Cost</div>
+                    <div style={{ fontSize: '26px', fontWeight: 900, color: '#0E2C7E', marginTop: '2px' }}>{futureCost}</div>
                   </div>
                 </div>
               </div>
@@ -1103,17 +1099,17 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
               {/* Bottom Full-Width Monthly Investment Required Pill */}
               <div
                 style={{
-                  backgroundColor: '#001a66',
+                  background: 'linear-gradient(135deg, #1A46C4 0%, #0E2C7E 100%)',
                   borderRadius: '36px',
                   padding: '16px 24px',
                   textAlign: 'center',
                   marginTop: 'auto',
                 }}
               >
-                <div style={{ fontSize: '16px', color: '#ff8c32', fontWeight: 700, letterSpacing: '0.02em' }}>
+                <div style={{ fontSize: '16px', color: '#BAE0FF', fontWeight: 700, letterSpacing: '0.02em' }}>
                   Monthly Investment Required
                 </div>
-                <div style={{ fontSize: '32px', fontWeight: 900, color: '#ff8c32', marginTop: '4px' }}>
+                <div style={{ fontSize: '32px', fontWeight: 900, color: '#ffffff', marginTop: '4px' }}>
                   {monthlySip}
                 </div>
               </div>
@@ -1235,7 +1231,7 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
                     boxShadow: '0 4px 12px rgba(0, 26, 102, 0.12)',
                   }}
                 >
-                  <div style={{ fontSize: '13px', color: '#ff8c32', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
+                  <div style={{ fontSize: '13px', color: '#BAE0FF', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase' }}>
                     Personalized For {childName ? childName : 'You'}
                   </div>
                   <div style={{ fontSize: '22px', fontWeight: 900, color: '#ffffff', marginTop: '2px', letterSpacing: '-0.01em' }}>
@@ -1365,34 +1361,34 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
           </div>
 
           {/* Dark Blue Corpus Pill */}
-          <div style={{ backgroundColor: '#001a66', borderRadius: '24px', padding: '16px', textAlign: 'center', color: '#ffffff' }}>
-            <div style={{ fontSize: '14px', color: '#ff8c32', fontWeight: 600 }}>Total Retirement Corpus</div>
-            <div style={{ fontSize: '30px', fontWeight: 900, color: '#ff8c32', marginTop: '2px' }}>{clientCorpusReq}</div>
+          <div style={{ background: 'linear-gradient(135deg, #1A46C4 0%, #0E2C7E 100%)', borderRadius: '24px', padding: '16px', textAlign: 'center', color: '#ffffff' }}>
+            <div style={{ fontSize: '14px', color: '#BAE0FF', fontWeight: 600 }}>Total Retirement Corpus</div>
+            <div style={{ fontSize: '30px', fontWeight: 900, color: '#ffffff', marginTop: '2px' }}>{clientCorpusReq}</div>
           </div>
 
           {/* Provisions Made (PF, NPS & SA) */}
-          <div style={{ backgroundColor: '#001a66', borderRadius: '18px', padding: '14px 20px', textAlign: 'center', color: '#ffffff' }}>
-            <div style={{ color: '#ff8c32', fontSize: '14px', fontWeight: 700 }}>Provisions Made (PF, NPS &amp; SA)</div>
-            <div style={{ color: '#ff8c32', fontSize: '24px', fontWeight: 900, marginTop: '4px' }}>{clientProvisionsMade}</div>
+          <div style={{ background: 'linear-gradient(135deg, #1A46C4 0%, #0E2C7E 100%)', borderRadius: '18px', padding: '14px 20px', textAlign: 'center', color: '#ffffff' }}>
+            <div style={{ color: '#BAE0FF', fontSize: '14px', fontWeight: 700 }}>Provisions Made (PF, NPS &amp; SA)</div>
+            <div style={{ color: '#ffffff', fontSize: '24px', fontWeight: 900, marginTop: '4px' }}>{clientProvisionsMade}</div>
           </div>
 
           {/* Expense Pills Grid */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
-            <div style={{ border: '2.5px solid #002b80', borderRadius: '18px', padding: '10px 14px', textAlign: 'center' }}>
-              <div style={{ fontSize: '12px', color: '#ff8c32', fontWeight: 600 }}>Expense at today's rate (P.M.)</div>
-              <div style={{ fontSize: '18px', fontWeight: 900, color: '#ff8c32', marginTop: '2px' }}>{clientExpToday}</div>
+            <div style={{ border: '2.5px solid #0E2C7E', borderRadius: '18px', padding: '10px 14px', textAlign: 'center' }}>
+              <div style={{ fontSize: '12px', color: '#2459D2', fontWeight: 700 }}>Expense at today's rate (P.M.)</div>
+              <div style={{ fontSize: '18px', fontWeight: 900, color: '#0E2C7E', marginTop: '2px' }}>{clientExpToday}</div>
             </div>
-            <div style={{ border: '2.5px solid #002b80', borderRadius: '18px', padding: '10px 14px', textAlign: 'center' }}>
-              <div style={{ fontSize: '12px', color: '#ff8c32', fontWeight: 600 }}>Expense at Retirement (P.M.)</div>
-              <div style={{ fontSize: '18px', fontWeight: 900, color: '#ff8c32', marginTop: '2px' }}>{clientExpAtRet}</div>
+            <div style={{ border: '2.5px solid #0E2C7E', borderRadius: '18px', padding: '10px 14px', textAlign: 'center' }}>
+              <div style={{ fontSize: '12px', color: '#2459D2', fontWeight: 700 }}>Expense at Retirement (P.M.)</div>
+              <div style={{ fontSize: '18px', fontWeight: 900, color: '#0E2C7E', marginTop: '2px' }}>{clientExpAtRet}</div>
             </div>
-            <div style={{ border: '2.5px solid #002b80', borderRadius: '18px', padding: '10px 14px', textAlign: 'center' }}>
-              <div style={{ fontSize: '12px', color: '#ff8c32', fontWeight: 600 }}>Monthly Investment Required</div>
-              <div style={{ fontSize: '18px', fontWeight: 900, color: '#ff8c32', marginTop: '2px' }}>{clientMonthlySip}</div>
+            <div style={{ border: '2.5px solid #0E2C7E', borderRadius: '18px', padding: '10px 14px', textAlign: 'center' }}>
+              <div style={{ fontSize: '12px', color: '#2459D2', fontWeight: 700 }}>Monthly Investment Required</div>
+              <div style={{ fontSize: '18px', fontWeight: 900, color: '#0E2C7E', marginTop: '2px' }}>{clientMonthlySip}</div>
             </div>
-            <div style={{ border: '2.5px solid #002b80', borderRadius: '18px', padding: '10px 14px', textAlign: 'center' }}>
-              <div style={{ fontSize: '12px', color: '#ff8c32', fontWeight: 600 }}>Lump Sum Investment Required</div>
-              <div style={{ fontSize: '18px', fontWeight: 900, color: '#ff8c32', marginTop: '2px' }}>{clientLumpSum}</div>
+            <div style={{ border: '2.5px solid #0E2C7E', borderRadius: '18px', padding: '10px 14px', textAlign: 'center' }}>
+              <div style={{ fontSize: '12px', color: '#2459D2', fontWeight: 700 }}>Lump Sum Investment Required</div>
+              <div style={{ fontSize: '18px', fontWeight: 900, color: '#0E2C7E', marginTop: '2px' }}>{clientLumpSum}</div>
             </div>
           </div>
         </div>
@@ -1429,7 +1425,7 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
 
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '11.5px', border: '1px solid #cbd5e1', marginTop: '8px', tableLayout: 'fixed' }}>
           <thead>
-            <tr style={{ backgroundColor: '#ff8c32', color: '#000000', fontWeight: 800, textAlign: 'center' }}>
+            <tr style={{ backgroundColor: '#2459D2', color: '#ffffff', fontWeight: 800, textAlign: 'center' }}>
               <th style={{ width: '23%', padding: '10px 4px', border: '1px solid #cbd5e1', lineHeight: '1.2' }}>Goals to be protected</th>
               <th style={{ width: '12%', padding: '10px 4px', border: '1px solid #cbd5e1', lineHeight: '1.2' }}>For/ After years</th>
               <th style={{ width: '24%', padding: '10px 4px', border: '1px solid #cbd5e1', lineHeight: '1.2' }}>Amount</th>
@@ -1512,9 +1508,9 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
                 })()}
               </>
             )}
-            <tr style={{ backgroundColor: '#ff8c32', fontWeight: 900 }}>
-              <td colSpan="4" style={{ padding: '12px 10px', border: '1px solid #cbd5e1', fontSize: '12px', color: '#000000' }}>Total insurance need</td>
-              <td style={{ padding: '12px 10px', border: '1px solid #cbd5e1', textAlign: 'right', fontSize: '14px', color: '#000000', whiteSpace: 'nowrap' }}>
+            <tr style={{ backgroundColor: '#2459D2', fontWeight: 900 }}>
+              <td colSpan="4" style={{ padding: '12px 10px', border: '1px solid #cbd5e1', fontSize: '12px', color: '#ffffff' }}>Total insurance need</td>
+              <td style={{ padding: '12px 10px', border: '1px solid #cbd5e1', textAlign: 'right', fontSize: '14px', color: '#ffffff', whiteSpace: 'nowrap' }}>
                 {formatInrFull(insuranceData.total_required || totalInsuranceNeed, '₹0')}
               </td>
             </tr>
@@ -1546,18 +1542,18 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
           <h1 style={{ fontSize: '32px', fontWeight: 900, color: '#0f172a', margin: 0 }}>
             Investment Summary
           </h1>
-          <div style={{ width: '90px', height: '55px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+          <div style={{ width: '130px', height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
             <img
               src="/assets/report/summary_checklist_image.png"
               alt="Summary Checklist"
-              style={{ maxWidth: '90px', maxHeight: '55px', width: 'auto', height: 'auto', objectFit: 'contain', display: 'block' }}
+              style={{ maxWidth: '130px', maxHeight: '80px', width: 'auto', height: 'auto', objectFit: 'contain', display: 'block' }}
             />
           </div>
         </div>
 
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px', border: '1px solid #cbd5e1', marginTop: '4px' }}>
           <thead>
-            <tr style={{ backgroundColor: '#ff8c32', color: '#000000', fontWeight: 800, textAlign: 'center' }}>
+            <tr style={{ backgroundColor: '#2459D2', color: '#ffffff', fontWeight: 800, textAlign: 'center' }}>
               <th style={{ padding: '12px 10px', border: '1px solid #cbd5e1' }}>Goals</th>
               <th style={{ padding: '12px 10px', border: '1px solid #cbd5e1' }}>Target Year</th>
               <th style={{ padding: '12px 10px', border: '1px solid #cbd5e1' }}>Monthly Investment</th>
@@ -1627,9 +1623,9 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
             })()}
 
             {/* Combined Total Monthly Investment Row */}
-            <tr style={{ backgroundColor: '#ff8c32', fontWeight: 900 }}>
-              <td colSpan="2" style={{ padding: '14px 12px', border: '1px solid #cbd5e1', fontSize: '14px', color: '#000000' }}>Total Monthly Investment</td>
-              <td style={{ padding: '14px 12px', border: '1px solid #cbd5e1', textAlign: 'right', fontSize: '16px', color: '#000000', whiteSpace: 'nowrap' }}>
+            <tr style={{ backgroundColor: '#2459D2', fontWeight: 900 }}>
+              <td colSpan="2" style={{ padding: '14px 12px', border: '1px solid #cbd5e1', fontSize: '14px', color: '#ffffff' }}>Total Monthly Investment</td>
+              <td style={{ padding: '14px 12px', border: '1px solid #cbd5e1', textAlign: 'right', fontSize: '16px', color: '#ffffff', whiteSpace: 'nowrap' }}>
                 {formatInrFull(
                   invSummary?.total_monthly_investment ||
                   summary?.monthly_investment_required ||
@@ -1666,14 +1662,14 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
           <h1 style={{ fontSize: '32px', fontWeight: 900, color: '#0f172a', margin: 0, lineHeight: 1.1 }}>
             What we<br />assume?
           </h1>
-          <div style={{ width: '90px', height: '55px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-            <img src="/assets/report/real_3d_scroll.png" alt="Scroll Ribbon" style={{ maxWidth: '90px', maxHeight: '55px', width: 'auto', height: 'auto', objectFit: 'contain', display: 'block' }} />
+          <div style={{ width: '130px', height: '80px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
+            <img src="/assets/report/real_3d_scroll.png" alt="Scroll Ribbon" style={{ maxWidth: '130px', maxHeight: '80px', width: 'auto', height: 'auto', objectFit: 'contain', display: 'block' }} />
           </div>
         </div>
 
         <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: '13px', border: '1px solid #cbd5e1', marginTop: '8px' }}>
           <thead>
-            <tr style={{ backgroundColor: '#ff8c32', color: '#000000', fontWeight: 800 }}>
+            <tr style={{ backgroundColor: '#2459D2', color: '#ffffff', fontWeight: 800 }}>
               <th style={{ padding: '14px 16px', border: '1px solid #cbd5e1', textAlign: 'left' }}>Assumptions</th>
               <th style={{ padding: '14px 16px', border: '1px solid #cbd5e1', textAlign: 'center' }}>Values</th>
             </tr>
@@ -1731,7 +1727,7 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
           </svg>
 
           <svg style={{ position: 'absolute', bottom: 0, right: 0, width: '360px', height: '360px', zIndex: 1 }} viewBox="0 0 360 360">
-            <polygon points="360,0 360,360 0,360" fill="#ff8c32" />
+            <polygon points="360,0 360,360 0,360" fill="#2459D2" />
           </svg>
 
           <div style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
@@ -1742,7 +1738,7 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
             <h1 style={{ fontSize: '44px', fontWeight: 900, color: '#000000', textAlign: 'center', margin: '0 0 8px 0', letterSpacing: '-0.02em' }}>
               Our Services {servicePages.length > 1 ? `(${pageIdx + 1}/${servicePages.length})` : ''}
             </h1>
-            <div style={{ width: '80px', height: '4px', backgroundColor: '#ff8c32', margin: '0 auto 24px auto', borderRadius: '2px' }} />
+            <div style={{ width: '80px', height: '4px', backgroundColor: '#2459D2', margin: '0 auto 24px auto', borderRadius: '2px' }} />
 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '14px', maxWidth: '440px', margin: '0 auto' }}>
               {pageServices.map((srv, idx) => (
@@ -1847,25 +1843,25 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
                 >
                   <div
                     style={{
-                      backgroundColor: '#f97316',
-                      border: '3px solid #001866',
+                      backgroundColor: '#F0F6FE',
+                      border: '2.5px solid #00297c',
                       borderRadius: '24px',
                       padding: '16px 20px 12px 20px',
-                      boxShadow: '4px 5px 0px #001866',
+                      boxShadow: '4px 5px 0px #00297c',
                       width: '100%',
                       boxSizing: 'border-box',
                     }}
                   >
                     {/* Single Dark Blue Quotation Icon */}
-                    <div style={{ fontSize: '34px', color: '#001866', lineHeight: 0.9, marginBottom: '4px', fontWeight: 900 }}>
+                    <div style={{ fontSize: '34px', color: '#01569e', lineHeight: 0.9, marginBottom: '4px', fontWeight: 900 }}>
                       ❝
                     </div>
                     {/* Quote Text */}
-                    <p style={{ fontSize: '11.5px', fontWeight: 700, lineHeight: 1.4, margin: '0 0 8px 0', color: '#000000' }}>
+                    <p style={{ fontSize: '11.5px', fontWeight: 700, lineHeight: 1.4, margin: '0 0 8px 0', color: '#0f172a' }}>
                       {item.quote}
                     </p>
                     {/* Author Details */}
-                    <div style={{ fontSize: '10.5px', fontWeight: 700, color: '#000000', textAlign: 'right' }}>
+                    <div style={{ fontSize: '10.5px', fontWeight: 700, color: '#01569e', textAlign: 'right' }}>
                       -{item.author}{item.designation ? `, ${item.designation}` : ''}
                     </div>
                   </div>
@@ -1877,10 +1873,10 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
                       height: 0,
                       borderLeft: '12px solid transparent',
                       borderRight: '12px solid transparent',
-                      borderTop: '14px solid #f97316',
+                      borderTop: '14px solid #F0F6FE',
                       margin: styleOpt.tailMargin,
                       marginTop: '-2px',
-                      filter: 'drop-shadow(2px 3px 0px #001866)',
+                      filter: 'drop-shadow(2px 3px 0px #00297c)',
                     }}
                   />
                 </div>
@@ -1890,7 +1886,7 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
         </div>
       ))}
 
-      {/* PAGE 15: CONTACT BACK COVER PAGE (100% Static PNG Template) */}
+      {/* PAGE 15: CONTACT BACK COVER PAGE (100% Exact Replica of Reference Image) */}
       <div
         className="report-page"
         style={{
@@ -1902,18 +1898,197 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
           boxSizing: 'border-box',
           margin: 0,
           padding: 0,
+          fontFamily: '"Montserrat", "Segoe UI", Helvetica, Arial, sans-serif',
         }}
       >
-        <img
-          src="/assets/report/last_page_contact_static.png"
-          alt="Wealth Wisdom Contact & Address"
+        {/* 1. Pure SVG Vector Background Shapes - EXACTLY Identical to Cover Page (Page 1) */}
+        <svg
+          style={{ position: 'absolute', top: 0, left: 0, width: '595px', height: '842px', zIndex: 1 }}
+          viewBox="0 0 595 842"
+        >
+          {/* Base Page Canvas */}
+          <rect width="595" height="842" fill="#ffffff" />
+
+          {/* TOP-LEFT LAYER 1: Cerulean Blue Wedge (#01569e) */}
+          <polygon points="0,0 169,0 0,220" fill="#01569e" />
+          {/* TOP-LEFT LAYER 2: Deep Classic Navy Slice (#00297c) */}
+          <polygon points="0,0 92,0 0,120" fill="#00297c" />
+
+          {/* BOTTOM-RIGHT LAYER 1: Parallel Light Grey Diagonal Stripe (#efefef) */}
+          <polygon points="595,186 595,266 152,842 91,842" fill="#efefef" />
+
+          {/* BOTTOM-RIGHT LAYER 2: Main Cerulean Blue Diagonal Band (#01569e) */}
+          <polygon points="595,266 595,646 445,842 152,842" fill="#01569e" />
+
+          {/* BOTTOM-RIGHT LAYER 3: Corner Deep Classic Navy Wedge (#00297c) */}
+          <polygon points="595,646 595,842 445,842" fill="#00297c" />
+        </svg>
+
+        {/* 2. Content Container (Left Side) */}
+        <div
           style={{
-            width: '595px',
-            height: '842px',
-            objectFit: 'cover',
-            display: 'block',
+            position: 'absolute',
+            top: '110px',
+            left: '60px',
+            width: '310px',
+            zIndex: 10,
+            display: 'flex',
+            flexDirection: 'column',
           }}
-        />
+        >
+          {/* Wealth Wisdom Logo */}
+          <div style={{ marginBottom: '22px' }}>
+            <img
+              src="/assets/wealth-wisdom-logo.png"
+              alt="Wealth Wisdom Logo"
+              style={{ height: '68px', objectFit: 'contain', display: 'block' }}
+              onError={(e) => { e.currentTarget.style.display = 'none'; }}
+            />
+          </div>
+
+          {/* Headline */}
+          <h2
+            style={{
+              fontSize: '19px',
+              fontWeight: 800,
+              fontStyle: 'italic',
+              color: '#01569e',
+              margin: '0 0 24px 0',
+              lineHeight: 1.3,
+              letterSpacing: '-0.01em',
+              textTransform: 'uppercase',
+            }}
+          >
+            GET IN TOUCH FOR DETAILED<br />INVESTMENT PLANNING
+          </h2>
+
+          {/* Contact Details Directory */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+            {/* Phone */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '11px' }}>
+              <div
+                style={{
+                  width: '22px',
+                  height: '22px',
+                  borderRadius: '50%',
+                  backgroundColor: '#01569e',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="#ffffff">
+                  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+                </svg>
+              </div>
+              <div style={{ fontSize: '11.5px', fontWeight: 600, color: '#00297c', letterSpacing: '-0.01em' }}>
+                +91 94222 03162, +91 86239 12149
+              </div>
+            </div>
+
+            {/* WhatsApp */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '11px' }}>
+              <div
+                style={{
+                  width: '22px',
+                  height: '22px',
+                  borderRadius: '50%',
+                  backgroundColor: '#01569e',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="#ffffff">
+                  <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z" />
+                </svg>
+              </div>
+              <div style={{ fontSize: '11.5px', fontWeight: 600, color: '#00297c', letterSpacing: '-0.01em' }}>
+                +91 95611 15408
+              </div>
+            </div>
+
+            {/* Email */}
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '11px' }}>
+              <div
+                style={{
+                  width: '22px',
+                  height: '22px',
+                  borderRadius: '50%',
+                  backgroundColor: '#01569e',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  marginTop: '1px',
+                }}
+              >
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="#ffffff">
+                  <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                </svg>
+              </div>
+              <div style={{ fontSize: '11px', fontWeight: 600, color: '#00297c', lineHeight: 1.35, letterSpacing: '-0.01em' }}>
+                <div>kailashmalpani@wealthwisdom.com</div>
+                <div>keshavmalpani@wealthwisdom.com</div>
+              </div>
+            </div>
+
+            {/* Address 1 */}
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '11px' }}>
+              <div
+                style={{
+                  width: '22px',
+                  height: '22px',
+                  borderRadius: '50%',
+                  backgroundColor: '#01569e',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  marginTop: '1px',
+                }}
+              >
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="#ffffff">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                </svg>
+              </div>
+              <div style={{ fontSize: '10px', fontWeight: 500, color: '#00297c', lineHeight: 1.35, letterSpacing: '-0.01em' }}>
+                D 614, FREEDOM TOWERS, Behind<br />
+                Asian Hospital, Akashwani square,<br />
+                Chhatrapati Sambhaji Nagar<br />
+                (Aurangabad) 431005
+              </div>
+            </div>
+
+            {/* Address 2 */}
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '11px' }}>
+              <div
+                style={{
+                  width: '22px',
+                  height: '22px',
+                  borderRadius: '50%',
+                  backgroundColor: '#01569e',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  marginTop: '1px',
+                }}
+              >
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="#ffffff">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                </svg>
+              </div>
+              <div style={{ fontSize: '10px', fontWeight: 500, color: '#00297c', lineHeight: 1.35, letterSpacing: '-0.01em' }}>
+                1st Floor, MASSIA Building More Chowk,<br />
+                Waluj MIDC Chh. Sambhajinagar<br />
+                (Aurangabad) – 431136
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

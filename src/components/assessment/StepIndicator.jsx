@@ -12,8 +12,8 @@ export function StepIndicator({ step, goToStep }) {
             onClick={() => goToStep(s)}
             className={`w-9 h-9 rounded-full font-heading text-xs font-bold flex items-center justify-center transition-all duration-300 cursor-pointer ${
               s === step 
-                ? 'bg-[#ED8B36] text-white shadow-[0_4px_12px_rgba(237,139,54,0.35)] scale-110' 
-                : 'bg-[#F2EFE9] text-[#8E8A80] hover:bg-[#EAE6DD] hover:text-[#55524B]'
+                ? 'glass-morphism-btn text-white scale-110 shadow-[0_4px_12px_rgba(36,89,210,0.35)]' 
+                : 'bg-white/70 text-[#64748B] hover:bg-white hover:text-[#2459D2] border border-[#D5E5FA]'
             }`}
           >
             {s}
