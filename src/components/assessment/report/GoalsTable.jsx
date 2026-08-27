@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatGoalTitle } from '../../../utils/formatters';
 
 const formatInrFullString = (val, defaultVal = '₹0') => {
   if (val === null || val === undefined) return defaultVal;
@@ -31,7 +32,7 @@ const formatInrFullString = (val, defaultVal = '₹0') => {
   return str;
 };
 
-export function GoalsTable({ calculationResult }) {
+export function GoalsTable({ calculationResult, childrenData = [] }) {
   if (!calculationResult) return null;
 
   const rawGoalItems = calculationResult.goals?.items || calculationResult.data?.goals?.items || [];
@@ -90,8 +91,10 @@ export function GoalsTable({ calculationResult }) {
         costDisplay = formatInrFullString(perPersonAmt * travellersCount);
       }
     }
+    const goalTitle = formatGoalTitle(g, childrenData, rawGoalItems) || g.goal || g.title || g.goal_type || 'Goal';
     items.push({
       ...g,
+      goal: goalTitle,
       current_cost_display: costDisplay,
       future_cost_display: formatInrFullString(g.future_cost),
       monthly_sip_display: formatInrFullString(g.monthly_sip),

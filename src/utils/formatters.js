@@ -105,120 +105,316 @@ export const buildCalcPayload = (formData) => {
 };
 
 /**
+ * Determine if a goal is specifically a child goal (Education, Higher Studies, Marriage, Child-related).
+ * Lifestyle goals (Foreign Tour, Car, House, Vacation, Retirement, Emergency Fund, etc.) are strictly NOT child goals.
+ */
+export const isChildGoal = (goal) => {
+  if (!goal) return false;
+
+  if (typeof goal === 'string') {
+    const s = goal.toLowerCase().trim();
+    // Explicit non-child indicators
+    if (
+      s.includes('tour') || 
+      s.includes('foreign') || 
+      s.includes('vacation') || 
+      s.includes('trip') || 
+      s.includes('travel') || 
+      s.includes('car') || 
+      s.includes('vehicle') || 
+      s.includes('automobile') ||
+      s.includes('house') || 
+      s.includes('home') || 
+      s.includes('property') || 
+      s.includes('emergency') || 
+      s.includes('retirement') || 
+      s.includes('wealth') || 
+      s.includes('business') ||
+      s.includes('household')
+    ) {
+      return false;
+    }
+    return (
+      s.includes('child') ||
+      s.includes('education') ||
+      s.includes('graduation') ||
+      s.includes('studies') ||
+      s.includes('school') ||
+      s.includes('college')
+    );
+  }
+
+  if (goal.category === 'lifestyle' || goal.category === 'retirement' || goal.is_retirement) {
+    return false;
+  }
+
+  if (goal.category === 'child_goal' || goal.category === 'child') {
+    return true;
+  }
+
+  if (goal.child_id || goal.child_number !== undefined || goal.child_index !== undefined) {
+    return true;
+  }
+
+  const rawTitle = (goal.goal_name || goal.goal_type || goal.title || goal.goal || goal.name || goal.need || '').toLowerCase().trim();
+  
+  if (
+    rawTitle.includes('tour') || 
+    rawTitle.includes('foreign') || 
+    rawTitle.includes('vacation') || 
+    rawTitle.includes('trip') || 
+    rawTitle.includes('travel') || 
+    rawTitle.includes('car') || 
+    rawTitle.includes('vehicle') || 
+    rawTitle.includes('automobile') ||
+    rawTitle.includes('house') || 
+    rawTitle.includes('home') || 
+    rawTitle.includes('property') || 
+    rawTitle.includes('emergency') || 
+    rawTitle.includes('retirement') || 
+    rawTitle.includes('wealth') || 
+    rawTitle.includes('business') ||
+    rawTitle.includes('household')
+  ) {
+    return false;
+  }
+
+  return (
+    rawTitle.includes('child') ||
+    rawTitle.includes('education') ||
+    rawTitle.includes('graduation') ||
+    rawTitle.includes('studies') ||
+    rawTitle.includes('school') ||
+    rawTitle.includes('college')
+  );
+};
+
+/**
  * Helper to infer the real child name from childrenData if child_name is missing or generic ("Child 1", "Child 2").
+ * STRICTLY returns empty string for non-child goals (Tour, Car, House, etc.).
  */
 export const getActualChildName = (goal = {}, childrenData = [], allGoals = []) => {
   if (!goal) return '';
-  let name = (goal.child_name || goal.childName || '').trim();
+
+  // If this is NOT a child goal, NEVER attach a child name!
+  if (!isChildGoal(goal)) {
+    return '';
+  }
+
+  // 1. Resolve childrenData if not provided or empty
+  let effectiveChildren = Array.isArray(childrenData) && childrenData.length > 0 ? childrenData : [];
+  if (effectiveChildren.length === 0 && typeof window !== 'undefined') {
+    try {
+      if (window.__WW_CHILDREN_DATA__ && Array.isArray(window.__WW_CHILDREN_DATA__) && window.__WW_CHILDREN_DATA__.length > 0) {
+        effectiveChildren = window.__WW_CHILDREN_DATA__;
+      } else {
+        const rawState = sessionStorage.getItem("ww_assessment_state");
+        if (rawState) {
+          const parsed = JSON.parse(rawState);
+          if (Array.isArray(parsed?.childrenData) && parsed.childrenData.length > 0) {
+            effectiveChildren = parsed.childrenData;
+          } else if (Array.isArray(parsed?.formData?.childrenData) && parsed.formData.childrenData.length > 0) {
+            effectiveChildren = parsed.formData.childrenData;
+          } else if (Array.isArray(parsed?.formData?.children) && parsed.formData.children.length > 0) {
+            effectiveChildren = parsed.formData.children;
+          }
+        }
+      }
+    } catch (e) {
+      // Ignore session storage errors
+    }
+  }
+
+  // Also check if goal itself carries childrenData or children
+  if (effectiveChildren.length === 0) {
+    if (Array.isArray(goal.childrenData) && goal.childrenData.length > 0) effectiveChildren = goal.childrenData;
+    else if (Array.isArray(goal.children) && goal.children.length > 0) effectiveChildren = goal.children;
+    else if (Array.isArray(goal.formData?.childrenData) && goal.formData.childrenData.length > 0) effectiveChildren = goal.formData.childrenData;
+    else if (Array.isArray(goal.formData?.children) && goal.formData.children.length > 0) effectiveChildren = goal.formData.children;
+  }
+
+  const isGenericName = (n) => !n || /^child\s*\d*('s)?$/i.test(String(n).trim());
+
+  // 2. Check if goal has an explicit child_name or childName
+  let name = (typeof goal === 'object' && goal ? (goal.child_name || goal.childName || '') : '').trim();
 
   // If raw title or goal_name starts with a name + "'s", e.g. "Aarav's Higher Studies"
-  const rawTitle = (goal.goal_name || goal.goal_type || goal.title || goal.goal || goal.name || '').trim();
+  const rawTitle = (typeof goal === 'string' ? goal : (goal.goal_name || goal.goal_type || goal.title || goal.goal || goal.name || goal.need || '')).trim();
   const titleNameMatch = rawTitle.match(/^([A-Za-z0-9\s]+)'s\s+/i);
-  if (titleNameMatch && titleNameMatch[1] && !/^child\s*\d+$/i.test(titleNameMatch[1].trim())) {
+  if (titleNameMatch && titleNameMatch[1] && !isGenericName(titleNameMatch[1])) {
     name = titleNameMatch[1].trim();
   }
 
-  // If generic ("Child 1", "Child 2") or empty, look up in childrenData by child_id, child_number, child_index
-  if ((!name || /^child\s*\d+('s)?$/i.test(name)) && Array.isArray(childrenData) && childrenData.length > 0) {
+  // 3. If name is generic ("Child 1", "Child 2") or empty, look up in effectiveChildren
+  if (isGenericName(name) && effectiveChildren.length > 0) {
     let childIdx = -1;
-    if (goal.child_id) {
-      childIdx = childrenData.findIndex(c => c && String(c.id || c._id) === String(goal.child_id));
+
+    // By child_id
+    if (goal.child_id !== undefined && goal.child_id !== null) {
+      childIdx = effectiveChildren.findIndex(c => c && String(c.id || c._id || c.child_id) === String(goal.child_id));
     }
+    // By child_number
     if (childIdx < 0 && goal.child_number !== undefined && goal.child_number !== null) {
       childIdx = parseInt(goal.child_number, 10) - 1;
-    } else if (childIdx < 0 && goal.child_index !== undefined && goal.child_index !== null) {
+    }
+    // By child_index
+    if (childIdx < 0 && goal.child_index !== undefined && goal.child_index !== null) {
       childIdx = parseInt(goal.child_index, 10);
-    } else if (childIdx < 0) {
-      const goalStr = `${goal.goal || ''} ${goal.goal_type || ''} ${goal.name || ''} ${goal.title || ''} ${goal.goal_name || ''}`;
+    }
+    // By matching "Child 1", "Child 2" inside the string
+    if (childIdx < 0) {
+      const goalStr = `${rawTitle} ${goal.goal || ''} ${goal.goal_type || ''} ${goal.name || ''} ${goal.title || ''} ${goal.goal_name || ''} ${goal.need || ''}`;
       const match = goalStr.match(/child\s*(\d+)/i);
       if (match && match[1]) {
         childIdx = parseInt(match[1], 10) - 1;
       }
     }
 
-    // If still no index found and we have allGoals list, find which child_goal index this goal is in allGoals
-    if (childIdx < 0 && Array.isArray(allGoals) && (goal.category === 'child_goal' || goal.category === 'child')) {
-      const childGoalsOnly = allGoals.filter(g => g && (g.category === 'child_goal' || g.category === 'child'));
+    // By index in allGoals
+    if (childIdx < 0 && Array.isArray(allGoals) && allGoals.length > 0) {
+      const childGoalsOnly = allGoals.filter(isChildGoal);
       const foundPos = childGoalsOnly.indexOf(goal);
       if (foundPos >= 0) {
-        childIdx = Math.min(foundPos, childrenData.length - 1);
+        childIdx = Math.min(foundPos, effectiveChildren.length - 1);
       }
     }
 
-    if (childIdx >= 0 && childrenData[childIdx]) {
-      const foundChild = childrenData[childIdx];
-      const realName = (foundChild.name || foundChild.child_name || foundChild.childName || '').trim();
-      if (realName && !/^child\s*\d+('s)?$/i.test(realName)) {
+    // Single child fallback: ONLY if this is confirmed to be a child goal
+    if (childIdx < 0 && effectiveChildren.length === 1 && isChildGoal(goal)) {
+      childIdx = 0;
+    }
+
+    if (childIdx >= 0 && effectiveChildren[childIdx]) {
+      const foundChild = effectiveChildren[childIdx];
+      const realName = (typeof foundChild === 'string' ? foundChild : (foundChild.name || foundChild.child_name || foundChild.childName || '')).trim();
+      if (realName && !isGenericName(realName)) {
         name = realName;
       }
     }
   }
 
-  // Fallback for child goals when child index is specified or single child
-  if ((!name || /^child\s*\d+('s)?$/i.test(name)) && (goal.category === 'child_goal' || goal.child_id || goal.child_number !== undefined || goal.child_index !== undefined) && Array.isArray(childrenData) && childrenData.length > 0) {
+  // 4. Fallback for child goals when generic name still remains (ONLY for child goals!)
+  if (isGenericName(name) && effectiveChildren.length > 0 && isChildGoal(goal)) {
     let targetIdx = 0;
     if (goal.child_number) targetIdx = parseInt(goal.child_number, 10) - 1;
     else if (goal.child_index !== undefined) targetIdx = parseInt(goal.child_index, 10);
+    else {
+      const match = rawTitle.match(/child\s*(\d+)/i);
+      if (match && match[1]) targetIdx = parseInt(match[1], 10) - 1;
+    }
 
-    const fallbackChild = childrenData[targetIdx] || childrenData[0];
+    const fallbackChild = effectiveChildren[targetIdx] || effectiveChildren[0];
     if (fallbackChild) {
-      const realName = (fallbackChild.name || fallbackChild.child_name || fallbackChild.childName || '').trim();
-      if (realName && !/^child\s*\d+('s)?$/i.test(realName)) {
+      const realName = (typeof fallbackChild === 'string' ? fallbackChild : (fallbackChild.name || fallbackChild.child_name || fallbackChild.childName || '')).trim();
+      if (realName && !isGenericName(realName)) {
         name = realName;
       }
     }
   }
 
-  // If still generic or empty, assign a fallback name like "Child 1" / "Child 2" for child goals
-  if (!name || /^child\s*\d+('s)?$/i.test(name)) {
+  // If still generic or empty, assign a fallback name like "Child 1" / "Child 2" only if this is a child goal and no real name exists
+  if (isGenericName(name) && isChildGoal(goal)) {
     if (goal.child_number) {
       name = `Child ${goal.child_number}`;
     } else if (goal.child_index !== undefined) {
       name = `Child ${parseInt(goal.child_index, 10) + 1}`;
     } else if (name) {
       // keep existing generic "Child 1", etc.
-    } else if (goal.category === 'child_goal') {
+    } else if (goal.category === 'child_goal' || (typeof goal === 'string' && /child/i.test(goal))) {
       name = 'Child 1';
     } else {
       return '';
     }
   }
-  return name.replace(/'s$/i, '');
+
+  return name ? name.replace(/'s$/i, '') : '';
 };
 
 /**
  * Format goal title uniformly across Roadmap, Goal Cards, and Report tables.
  * Replaces "Graduation", "Higher Education", "Education" with "Higher Studies".
  * Prefixes child-related goals with child's name (e.g. "Aarav's Higher Studies", "Priya's Marriage").
+ * STRICTLY NEVER prefixes non-child goals (Foreign Tour, Car, House, etc.) with a child's name.
  */
 export const formatGoalTitle = (goal = {}, childrenData = [], allGoals = []) => {
   if (!goal) return 'Financial Goal';
+
+  const isChild = isChildGoal(goal);
+  const childName = isChild ? getActualChildName(goal, childrenData, allGoals) : '';
+  const isGeneric = !childName || /^child\s*\d*$/i.test(childName.trim());
+
   if (typeof goal === 'string') {
     let formatted = goal.trim();
+
+    // If NOT a child goal, just return clean title without child name
+    if (!isChild) {
+      if (
+        /^graduation(\s*fund)?$/i.test(formatted) ||
+        /^higher\s*education$/i.test(formatted) ||
+        /^higher\s*studies$/i.test(formatted)
+      ) {
+        return 'Higher Studies';
+      }
+      return formatted;
+    }
+
+    // If string has "Child 1's" / "Child 2's", strip generic child prefix
+    if (childName && !isGeneric) {
+      formatted = formatted.replace(/^child\s*\d+('s)?\s*[-–:]?\s*/i, '');
+      formatted = formatted.replace(/^child\s*[-–:]?\s*/i, '');
+    }
+
     if (
-      /^graduation(\s*fund)?$/i.test(formatted) ||
-      /^higher\s*education$/i.test(formatted) ||
-      /^education$/i.test(formatted) ||
-      /^child\s*education$/i.test(formatted) ||
-      /^higher\s*studies$/i.test(formatted)
+      /^[-–:]?\s*graduation(\s*fund)?$/i.test(formatted) ||
+      /^[-–:]?\s*higher\s*education$/i.test(formatted) ||
+      /^[-–:]?\s*education$/i.test(formatted) ||
+      /^[-–:]?\s*child\s*education$/i.test(formatted) ||
+      /^[-–:]?\s*higher\s*studies$/i.test(formatted)
+    ) {
+      return childName && !isGeneric ? `${childName}'s Higher Studies` : (childName ? `${childName}'s Higher Studies` : 'Higher Studies');
+    }
+
+    if (
+      /^[-–:]?\s*marriage(\s*fund)?$/i.test(formatted) ||
+      /^[-–:]?\s*wedding$/i.test(formatted) ||
+      /^[-–:]?\s*child\s*marriage$/i.test(formatted)
+    ) {
+      return childName && !isGeneric ? `${childName}'s Marriage` : (childName ? `${childName}'s Marriage` : 'Marriage');
+    }
+
+    formatted = formatted
+      .replace(/\bgraduation\b/gi, 'Higher Studies')
+      .replace(/\bhigher education\b/gi, 'Higher Studies');
+
+    if (childName && !isGeneric) {
+      if (!formatted.toLowerCase().startsWith(childName.toLowerCase())) {
+        return `${childName}'s ${formatted.replace(/^[-–:]\s*/, '')}`;
+      }
+    }
+    return formatted;
+  }
+
+  const rawTitle = (goal.goal_name || goal.goal_type || goal.goal || goal.title || goal.name || goal.need || 'Financial Goal').trim();
+
+  // If this is NOT a child goal, NEVER attach a child's name!
+  if (!isChild) {
+    if (
+      /^graduation(\s*fund)?$/i.test(rawTitle) ||
+      /^higher\s*education$/i.test(rawTitle) ||
+      /^higher\s*studies$/i.test(rawTitle)
     ) {
       return 'Higher Studies';
     }
-    return formatted
-      .replace(/\bgraduation\b/gi, 'Higher Studies')
-      .replace(/\bhigher education\b/gi, 'Higher Studies');
+    return rawTitle;
   }
-
-  const rawTitle = (goal.goal_name || goal.goal_type || goal.goal || goal.title || goal.name || 'Financial Goal').trim();
-  const childName = getActualChildName(goal, childrenData, allGoals);
 
   let specificType = rawTitle;
   if (childName && rawTitle.toLowerCase().startsWith(`${childName.toLowerCase()}'s`)) {
     specificType = rawTitle.slice(`${childName.toLowerCase()}'s`.length).trim();
   } else {
     specificType = rawTitle
-      .replace(/^child\s*\d+('s)?\s*/i, '')
-      .replace(/^child\s*/i, '')
+      .replace(/^child\s*\d+('s)?\s*[-–:]?\s*/i, '')
+      .replace(/^child\s*[-–:]?\s*/i, '')
       .replace(/\s*goal$/i, '')
       .trim();
   }
@@ -232,6 +428,12 @@ export const formatGoalTitle = (goal = {}, childrenData = [], allGoals = []) => 
     /^higher\s*studies$/i.test(specificType)
   ) {
     specificType = 'Higher Studies';
+  } else if (
+    /^marriage(\s*fund)?$/i.test(specificType) ||
+    /^wedding$/i.test(specificType) ||
+    /^child\s*marriage$/i.test(specificType)
+  ) {
+    specificType = 'Marriage';
   }
 
   if (childName && (specificType.toLowerCase() === childName.toLowerCase() || specificType.toLowerCase().includes(childName.toLowerCase()))) {

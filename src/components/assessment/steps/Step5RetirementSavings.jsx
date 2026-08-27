@@ -48,168 +48,183 @@ export function Step5RetirementSavings() {
             
             <div className="space-y-2">
               <h1 className="font-heading text-[26px] sm:text-[32px] lg:text-[34px] font-black leading-tight text-[#0F172A]">
-                Current Retirement Savings
+                Retirement Goal Planning
               </h1>
               <p className="text-sm leading-relaxed max-w-lg font-medium text-[#475569]">
-                Tell us about your existing retirement savings and employer-sponsored plans so we can accurately assess your future retirement readiness.
+                Plan your target retirement timeline, expected annual income, and existing retirement savings so we can accurately assess your future retirement readiness.
               </p>
             </div>
 
             {/* Form Areas */}
-            <div className="space-y-5 pt-2">
+            <div className="space-y-6 pt-2">
               
-              {/* Target Age & Years Until Retirement Row */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+              {/* RETIREMENT TIMELINE & INCOME SECTION */}
+              <div className="space-y-4">
+                <div className="flex items-center text-[#2459D2] font-bold text-xs uppercase tracking-wider border-l-2 border-[#2459D2] pl-2 mb-2 select-none">
+                  RETIREMENT TIMELINE & INCOME
+                </div>
+
+                {/* Target Age & Years Until Retirement Row */}
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                  <FormField
+                    label="Target Retirement Age"
+                    name="targetRetireAge"
+                    value={formData.targetRetireAge}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    error={(touched.targetRetireAge || showAllErrors) ? errors.targetRetireAge : null}
+                    placeholder="Enter target retirement age"
+                    type="number"
+                    required={false}
+                  />
+                  <FormField
+                    label="Years Until Retirement"
+                    name="yearsUntilRetirement"
+                    value={formData.yearsUntilRetirement}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    error={(touched.yearsUntilRetirement || showAllErrors) ? errors.yearsUntilRetirement : null}
+                    placeholder="Enter years remaining"
+                    type="number"
+                    required={false}
+                  />
+                </div>
+
+                {/* Required Annual Income */}
                 <FormField
-                  label="Target Retirement Age"
-                  name="targetRetireAge"
-                  value={formData.targetRetireAge}
+                  label="Required Annual Income (Today's Value)"
+                  name="requiredAnnualIncome"
+                  value={formData.requiredAnnualIncome}
                   onChange={handleInputChange}
                   onBlur={handleBlur}
-                  error={(touched.targetRetireAge || showAllErrors) ? errors.targetRetireAge : null}
-                  placeholder="Enter target retirement age"
-                  type="number"
-                  required={false}
-                />
-                <FormField
-                  label="Years Until Retirement"
-                  name="yearsUntilRetirement"
-                  value={formData.yearsUntilRetirement}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  error={(touched.yearsUntilRetirement || showAllErrors) ? errors.yearsUntilRetirement : null}
-                  placeholder="Enter years remaining"
+                  error={(touched.requiredAnnualIncome || showAllErrors) ? errors.requiredAnnualIncome : null}
+                  placeholder="Enter annual income required"
                   type="number"
                   required={false}
                 />
               </div>
 
-              {/* Required Annual Income */}
-              <FormField
-                label="Required Annual Income (Today's Value)"
-                name="requiredAnnualIncome"
-                value={formData.requiredAnnualIncome}
-                onChange={handleInputChange}
-                onBlur={handleBlur}
-                error={(touched.requiredAnnualIncome || showAllErrors) ? errors.requiredAnnualIncome : null}
-                placeholder="Enter annual income required"
-                type="number"
-                required={false}
-              />
-
-              {/* EPF Section */}
-              <div className="space-y-4 pt-4">
+              {/* CURRENT RETIREMENT SAVINGS SECTION */}
+              <div className="space-y-5 pt-3">
                 <div className="flex items-center text-[#2459D2] font-bold text-xs uppercase tracking-wider border-l-2 border-[#2459D2] pl-2 mb-2 select-none">
-                  EMPLOYEES' PROVIDENT FUND (EPF)
+                  CURRENT RETIREMENT SAVINGS
                 </div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <FormField
-                    label="Employer's Share"
-                    name="epfEmployerShare"
-                    value={formData.epfEmployerShare}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    error={(touched.epfEmployerShare || showAllErrors) ? errors.epfEmployerShare : null}
-                    placeholder="Enter amount"
-                    type="number"
-                    required={false}
-                  />
-                  <FormField
-                    label="Employee's Share"
-                    name="epfEmployeeShare"
-                    value={formData.epfEmployeeShare}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    error={(touched.epfEmployeeShare || showAllErrors) ? errors.epfEmployeeShare : null}
-                    placeholder="Enter amount"
-                    type="number"
-                    required={false}
-                  />
-                </div>
-                <FormField
-                  label="Total Accumulated Corpus"
-                  name="epfTotalCorpus"
-                  value={formData.epfTotalCorpus}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  error={(touched.epfTotalCorpus || showAllErrors) ? errors.epfTotalCorpus : null}
-                  placeholder="Enter total accumulated amount"
-                  type="number"
-                  required={false}
-                />
-              </div>
 
-              {/* NPS Section */}
-              <div className="space-y-4 pt-4">
-                <div className="flex items-center text-[#2459D2] font-bold text-xs uppercase tracking-wider border-l-2 border-[#2459D2] pl-2 mb-2 select-none">
-                  NATIONAL PENSION SYSTEM (NPS)
-                </div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <FormField
-                    label="Employer's Contribution"
-                    name="npsEmployerShare"
-                    value={formData.npsEmployerShare}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    error={(touched.npsEmployerShare || showAllErrors) ? errors.npsEmployerShare : null}
-                    placeholder="Enter amount"
-                    type="number"
-                    required={false}
-                  />
-                  <FormField
-                    label="Employee's Contribution"
-                    name="npsEmployeeShare"
-                    value={formData.npsEmployeeShare}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    error={(touched.npsEmployeeShare || showAllErrors) ? errors.npsEmployeeShare : null}
-                    placeholder="Enter amount"
-                    type="number"
-                    required={false}
-                  />
-                </div>
-                <FormField
-                  label="Total Accumulated Corpus"
-                  name="npsTotalCorpus"
-                  value={formData.npsTotalCorpus}
-                  onChange={handleInputChange}
-                  onBlur={handleBlur}
-                  error={(touched.npsTotalCorpus || showAllErrors) ? errors.npsTotalCorpus : null}
-                  placeholder="Enter total accumulated amount"
-                  type="number"
-                  required={false}
-                />
-              </div>
-
-              {/* Superannuation Section */}
-              <div className="space-y-4 pt-4">
-                <div className="flex items-center text-[#2459D2] font-bold text-xs uppercase tracking-wider border-l-2 border-[#2459D2] pl-2 mb-2 select-none">
-                  SUPERANNUATION FUND
-                </div>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  <FormField
-                    label="Employer's Share"
-                    name="superEmployerShare"
-                    value={formData.superEmployerShare}
-                    onChange={handleInputChange}
-                    onBlur={handleBlur}
-                    error={(touched.superEmployerShare || showAllErrors) ? errors.superEmployerShare : null}
-                    placeholder="Enter amount"
-                    type="number"
-                    required={false}
-                  />
+                {/* EPF Section */}
+                <div className="space-y-4">
+                  <div className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider pl-1 select-none">
+                    EMPLOYEES' PROVIDENT FUND (EPF)
+                  </div>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <FormField
+                      label="Employer's Share"
+                      name="epfEmployerShare"
+                      value={formData.epfEmployerShare}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      error={(touched.epfEmployerShare || showAllErrors) ? errors.epfEmployerShare : null}
+                      placeholder="Enter amount"
+                      type="number"
+                      required={false}
+                    />
+                    <FormField
+                      label="Employee's Share"
+                      name="epfEmployeeShare"
+                      value={formData.epfEmployeeShare}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      error={(touched.epfEmployeeShare || showAllErrors) ? errors.epfEmployeeShare : null}
+                      placeholder="Enter amount"
+                      type="number"
+                      required={false}
+                    />
+                  </div>
                   <FormField
                     label="Total Accumulated Corpus"
-                    name="superTotalCorpus"
-                    value={formData.superTotalCorpus}
+                    name="epfTotalCorpus"
+                    value={formData.epfTotalCorpus}
                     onChange={handleInputChange}
                     onBlur={handleBlur}
-                    error={(touched.superTotalCorpus || showAllErrors) ? errors.superTotalCorpus : null}
-                    placeholder="Enter amount"
+                    error={(touched.epfTotalCorpus || showAllErrors) ? errors.epfTotalCorpus : null}
+                    placeholder="Enter total accumulated amount"
                     type="number"
                     required={false}
                   />
                 </div>
+
+                {/* NPS Section */}
+                <div className="space-y-4 pt-2">
+                  <div className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider pl-1 select-none">
+                    NATIONAL PENSION SYSTEM (NPS)
+                  </div>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <FormField
+                      label="Employer's Contribution"
+                      name="npsEmployerShare"
+                      value={formData.npsEmployerShare}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      error={(touched.npsEmployerShare || showAllErrors) ? errors.npsEmployerShare : null}
+                      placeholder="Enter amount"
+                      type="number"
+                      required={false}
+                    />
+                    <FormField
+                      label="Employee's Contribution"
+                      name="npsEmployeeShare"
+                      value={formData.npsEmployeeShare}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      error={(touched.npsEmployeeShare || showAllErrors) ? errors.npsEmployeeShare : null}
+                      placeholder="Enter amount"
+                      type="number"
+                      required={false}
+                    />
+                  </div>
+                  <FormField
+                    label="Total Accumulated Corpus"
+                    name="npsTotalCorpus"
+                    value={formData.npsTotalCorpus}
+                    onChange={handleInputChange}
+                    onBlur={handleBlur}
+                    error={(touched.npsTotalCorpus || showAllErrors) ? errors.npsTotalCorpus : null}
+                    placeholder="Enter total accumulated amount"
+                    type="number"
+                    required={false}
+                  />
+                </div>
+
+                {/* Superannuation Section */}
+                <div className="space-y-4 pt-2">
+                  <div className="text-[11px] font-bold text-[#64748B] uppercase tracking-wider pl-1 select-none">
+                    SUPERANNUATION FUND
+                  </div>
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                    <FormField
+                      label="Employer's Share"
+                      name="superEmployerShare"
+                      value={formData.superEmployerShare}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      error={(touched.superEmployerShare || showAllErrors) ? errors.superEmployerShare : null}
+                      placeholder="Enter amount"
+                      type="number"
+                      required={false}
+                    />
+                    <FormField
+                      label="Total Accumulated Corpus"
+                      name="superTotalCorpus"
+                      value={formData.superTotalCorpus}
+                      onChange={handleInputChange}
+                      onBlur={handleBlur}
+                      error={(touched.superTotalCorpus || showAllErrors) ? errors.superTotalCorpus : null}
+                      placeholder="Enter amount"
+                      type="number"
+                      required={false}
+                    />
+                  </div>
+                </div>
+
               </div>
 
             </div>

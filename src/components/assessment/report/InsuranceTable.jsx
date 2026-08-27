@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatGoalTitle } from '../../../utils/formatters';
 
 const formatInrFullString = (val, defaultVal = '₹0') => {
   if (val === null || val === undefined) return defaultVal;
@@ -31,7 +32,7 @@ const formatInrFullString = (val, defaultVal = '₹0') => {
   return str;
 };
 
-export function InsuranceTable({ calculationResult }) {
+export function InsuranceTable({ calculationResult, childrenData = [] }) {
   if (!calculationResult || !calculationResult.insurance || calculationResult.insurance.items.length === 0) {
     return null;
   }
@@ -56,7 +57,7 @@ export function InsuranceTable({ calculationResult }) {
           <tbody className="divide-y divide-[#77B1EC]/20 text-[#0E2C7E]">
             {calculationResult.insurance.items.map((ins, idx) => (
               <tr key={idx} className="bg-white/60 hover:bg-white/90 transition-colors">
-                <td className="px-4 py-3 font-semibold">{ins.need}</td>
+                <td className="px-4 py-3 font-semibold">{formatGoalTitle(ins.need || ins.goal || 'Insurance Need', childrenData)}</td>
                 <td className="px-4 py-3 text-center text-slate-600 whitespace-nowrap">{ins.years} Years</td>
                 <td className="px-4 py-3 text-right font-medium whitespace-nowrap">{formatInrFullString(ins.amount)}</td>
                 <td className="px-4 py-3 text-center whitespace-nowrap min-w-[130px]" style={{ minWidth: '130px' }}>

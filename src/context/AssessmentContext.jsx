@@ -106,7 +106,12 @@ export default function AssessmentProvider({ children }) {
   useEffect(() => { saveToSession({ assessmentId }); }, [assessmentId]);
   useEffect(() => { saveToSession({ formData }); }, [formData]);
   useEffect(() => { saveToSession({ childrenCount }); }, [childrenCount]);
-  useEffect(() => { saveToSession({ childrenData }); }, [childrenData]);
+  useEffect(() => { 
+    saveToSession({ childrenData }); 
+    if (typeof window !== 'undefined') {
+      window.__WW_CHILDREN_DATA__ = childrenData;
+    }
+  }, [childrenData]);
   useEffect(() => { saveToSession({ activeGoals }); }, [activeGoals]);
   useEffect(() => { saveToSession({ calculationResult }); }, [calculationResult]);
   useEffect(() => { saveToSession({ services }); }, [services]);

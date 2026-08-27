@@ -143,6 +143,39 @@ describe('formatters - new-wealth-fe', () => {
       expect(formatGoalTitle(goal1, childrenData, allGoals)).toBe("Aarav's Higher Studies");
       expect(formatGoalTitle(goal2, childrenData, allGoals)).toBe("Priya's Marriage");
     });
+
+    test('should resolve real child name when goal is a raw backend string containing Child 1 / Child 2', () => {
+      const childrenData = [{ name: 'Aarav' }, { name: 'Priya' }];
+      expect(formatGoalTitle("Child 1's Higher Education", childrenData)).toBe("Aarav's Higher Studies");
+      expect(formatGoalTitle("Child 2's Marriage", childrenData)).toBe("Priya's Marriage");
+      expect(formatGoalTitle("Child 1 - Education", childrenData)).toBe("Aarav's Higher Studies");
+    });
+
+    test('should resolve real child name when goal object contains generic goal property string', () => {
+      const childrenData = [{ name: 'Aarav' }, { name: 'Priya' }];
+      const row1 = { goal: "Child 1's Higher Education", target_year: 2035 };
+      const row2 = { goal: "Child 2's Marriage", target_year: 2040 };
+      expect(formatGoalTitle(row1, childrenData)).toBe("Aarav's Higher Studies");
+      expect(formatGoalTitle(row2, childrenData)).toBe("Priya's Marriage");
+    });
+
+    test('should NEVER attach child name to lifestyle goals like Foreign Tour, Car, House, Vacation', () => {
+      const childrenData = [{ name: 'Aarav' }, { name: 'Priya' }];
+      
+      expect(formatGoalTitle("Foreign Tour", childrenData)).toBe("Foreign Tour");
+      expect(formatGoalTitle("Vacation", childrenData)).toBe("Vacation");
+      expect(formatGoalTitle("Car", childrenData)).toBe("Car");
+      expect(formatGoalTitle("House", childrenData)).toBe("House");
+
+      const tourGoal = { category: 'lifestyle', goal_type: 'Foreign Tour', title: 'Foreign Tour' };
+      expect(formatGoalTitle(tourGoal, childrenData)).toBe("Foreign Tour");
+
+      const carGoal = { category: 'lifestyle', goal_type: 'Car', title: 'Car' };
+      expect(formatGoalTitle(carGoal, childrenData)).toBe("Car");
+
+      const houseGoal = { category: 'lifestyle', goal_type: 'House', goal_name: 'House' };
+      expect(formatGoalTitle(houseGoal, childrenData)).toBe("House");
+    });
   });
 
   describe('stripSalutation', () => {

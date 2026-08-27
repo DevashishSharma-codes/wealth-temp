@@ -270,11 +270,14 @@ export function TripPlanModal({ isOpen, onClose, onSave, goal, childrenCount }) 
       });
     }
 
-    console.log('✈️ [TRIP MODAL SAVE] Saving 5 destinations:', combinedDestinations.map(x => x.name || x));
+    const perPerson = Number(tripBudgetPerPerson) || (cost ? Math.round(Number(cost) / (Number(tripTravellers) || 1)) : 0);
 
     onSave({
       targetYear: tripTargetYear || String(new Date().getFullYear() + 5),
       todaysCost: String(cost),
+      cost_per_person: perPerson,
+      budgetPerPerson: perPerson,
+      costPerPerson: perPerson,
       selectedDestinations: combinedDestinations,
       suggested_tours: combinedDestinations,
       budgetOptions: budgetOptions,

@@ -539,11 +539,11 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
   };
 
   const findFormGoal = (gObj, fObj, cData = []) => {
-    if (!fObj && !cData) return null;
-    const rawGType = gObj?.goal_type || gObj?.title || gObj?.goal || '';
+    if (!fObj && !cData && typeof window === 'undefined') return null;
+    const rawGType = gObj?.goal_type || gObj?.type || gObj?.title || gObj?.goal || gObj?.goalName || gObj?.name || '';
     const gType = String(rawGType).toLowerCase();
-    const isEdu = gType.includes('education') || gType.includes('graduation') || gType.includes('college');
-    const isTour = gType.includes('tour') || gType.includes('foreign') || gType.includes('vacation') || gType.includes('trip');
+    const isEdu = gType.includes('education') || gType.includes('graduation') || gType.includes('college') || gType.includes('studies');
+    const isTour = gType.includes('tour') || gType.includes('foreign') || gType.includes('vacation') || gType.includes('trip') || gType.includes('travel');
 
     const goalsList = [
       ...(Array.isArray(fObj?.goals) ? fObj.goals : []),
@@ -551,15 +551,28 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
       ...(Array.isArray(fObj?.lifestyleGoals) ? fObj.lifestyleGoals : []),
     ];
 
+    if (goalsList.length === 0 && typeof window !== 'undefined') {
+      try {
+        const rawState = sessionStorage.getItem("ww_assessment_state");
+        if (rawState) {
+          const parsed = JSON.parse(rawState);
+          if (Array.isArray(parsed?.activeGoals)) goalsList.push(...parsed.activeGoals);
+          if (Array.isArray(parsed?.formData?.activeGoals)) goalsList.push(...parsed.formData.activeGoals);
+          if (Array.isArray(parsed?.formData?.goals)) goalsList.push(...parsed.formData.goals);
+          if (Array.isArray(parsed?.goals)) goalsList.push(...parsed.goals);
+        }
+      } catch (e) {}
+    }
+
     for (let fg of goalsList) {
       if (!fg) continue;
-      const rawFg = fg?.goalType || fg?.goal_type || fg?.title || fg?.name || fg?.id || '';
+      const rawFg = fg?.type || fg?.goalType || fg?.goal_type || fg?.title || fg?.name || fg?.goalName || fg?.category || '';
       const fgType = String(rawFg).toLowerCase();
 
-      if (isEdu && (fgType.includes('education') || fgType.includes('graduation') || fgType.includes('college'))) {
+      if (isEdu && (fgType.includes('education') || fgType.includes('graduation') || fgType.includes('college') || fgType.includes('studies'))) {
         return fg;
       }
-      if (isTour && (fgType.includes('tour') || fgType.includes('foreign') || fgType.includes('vacation') || fgType.includes('trip'))) {
+      if (isTour && (fgType.includes('tour') || fgType.includes('foreign') || fgType.includes('vacation') || fgType.includes('trip') || fgType.includes('travel'))) {
         return fg;
       }
       if (fgType && (gType.includes(fgType) || fgType.includes(gType))) {
@@ -581,7 +594,7 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
       if (Array.isArray(child.goals)) {
         for (let fg of child.goals) {
           if (!fg) continue;
-          const rawFg = fg?.goalType || fg?.goal_type || fg?.title || fg?.name || fg?.id || '';
+          const rawFg = fg?.type || fg?.goalType || fg?.goal_type || fg?.title || fg?.name || fg?.id || '';
           const fgType = String(rawFg).toLowerCase();
           if (isEdu && (fgType.includes('education') || fgType.includes('graduation') || fgType.includes('college') || fg.selectedColleges || fg.budgetOptions)) {
             return fg;
@@ -623,6 +636,29 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
       try { explicit = JSON.parse(explicit); } catch (e) { explicit = explicit.split(',').map(s => s.trim()); }
     }
 
+    // Number of travellers:
+    // If goal specifies travellers, use it. Otherwise calculate 2 adults + children count.
+    const numChildren = Array.isArray(cData) && cData.length > 0
+      ? cData.length
+      : Number(formObj?.numberOfChildren ?? formObj?.childrenCount ?? (Array.isArray(formObj?.children) ? formObj.children.length : (Array.isArray(formObj?.childrenData) ? formObj.childrenData.length : 1)));
+    
+    const travellers = Math.max(1, Number(combinedGoal?.travellers || combinedGoal?.people || formObj?.travellers || (2 + numChildren) || 3));
+
+    // Per-person budget calculation:
+    const explicitPerPerson = Number(
+      combinedGoal?.cost_per_person ||
+      combinedGoal?.costPerPerson ||
+      combinedGoal?.budgetPerPerson ||
+      combinedGoal?.tripBudgetPerPerson ||
+      combinedGoal?.budget_per_person ||
+      0
+    );
+
+    const rawBudget = extractTargetBudget(combinedGoal, 900000);
+    const perPersonBudget = explicitPerPerson > 0
+      ? explicitPerPerson
+      : (rawBudget > 0 ? Math.round(rawBudget / travellers) : 300000);
+
     if (Array.isArray(explicit) && explicit.length > 0) {
       const list = [];
       explicit.forEach(item => {
@@ -649,9 +685,6 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
       });
       if (list.length > 0) {
         const selectedNames = new Set(list.map(l => l.name.toLowerCase()));
-        const rawBudget = extractTargetBudget(combinedGoal, 900000);
-        const travellers = Number(combinedGoal?.travellers || formObj?.travellers || 3);
-        const perPersonBudget = rawBudget > 150000 ? Math.round(rawBudget / travellers) : rawBudget;
 
         const fillers = [...DB_TOUR_DESTINATIONS]
           .sort((a, b) => Math.abs(a.budget - perPersonBudget) - Math.abs(b.budget - perPersonBudget))
@@ -659,15 +692,12 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
           .map(d => ({ flag: d.flag, code: d.code, name: d.name, cost: `${fmtInrRange(d.budget)} (per person)` }));
 
         const final5 = [...list, ...fillers].slice(0, 5);
-        console.log('🚀 [REPORT LOGGER] Top 5 Tour Options for Report:', final5.map(x => x.name));
+        console.log('🚀 [REPORT LOGGER] Top 5 Tour Options for Report:', final5.map(x => x.name), 'Per-Person Budget:', perPersonBudget);
         return final5;
       }
     }
 
-    // Dynamic budget distance calculation
-    const rawBudget = extractTargetBudget(combinedGoal, 900000);
-    const travellers = Number(combinedGoal?.travellers || formObj?.travellers || 3);
-    const perPersonBudget = rawBudget > 150000 ? Math.round(rawBudget / travellers) : rawBudget;
+    // Dynamic budget distance calculation based strictly on per-person budget
     const sorted = [...DB_TOUR_DESTINATIONS].sort((a, b) => Math.abs(a.budget - perPersonBudget) - Math.abs(b.budget - perPersonBudget));
 
     const final5 = sorted.slice(0, 5).map(d => ({
@@ -676,7 +706,7 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
       name: d.name,
       cost: `${fmtInrRange(d.budget)} (per person)`,
     }));
-    console.log('🚀 [REPORT LOGGER] Top 5 Tour Options for Report (Calculated):', final5.map(x => x.name));
+    console.log('🚀 [REPORT LOGGER] Top 5 Tour Options for Report (Calculated):', final5.map(x => x.name), 'Per-Person Budget:', perPersonBudget);
     return final5;
   };
 
@@ -1101,15 +1131,15 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
                 style={{
                   background: 'linear-gradient(135deg, #1A46C4 0%, #0E2C7E 100%)',
                   borderRadius: '36px',
-                  padding: '16px 24px',
+                  padding: '18px 24px',
                   textAlign: 'center',
                   marginTop: 'auto',
                 }}
               >
-                <div style={{ fontSize: '16px', color: '#BAE0FF', fontWeight: 700, letterSpacing: '0.02em' }}>
+                <div style={{ fontSize: '20px', color: '#BAE0FF', fontWeight: 800, letterSpacing: '0.03em' }}>
                   Monthly Investment Required
                 </div>
-                <div style={{ fontSize: '32px', fontWeight: 900, color: '#ffffff', marginTop: '4px' }}>
+                <div style={{ fontSize: '38px', fontWeight: 900, color: '#ffffff', marginTop: '4px' }}>
                   {monthlySip}
                 </div>
               </div>
@@ -1374,21 +1404,21 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
 
           {/* Expense Pills Grid */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '14px' }}>
-            <div style={{ border: '2.5px solid #0E2C7E', borderRadius: '18px', padding: '10px 14px', textAlign: 'center' }}>
-              <div style={{ fontSize: '12px', color: '#2459D2', fontWeight: 700 }}>Expense at today's rate (P.M.)</div>
-              <div style={{ fontSize: '18px', fontWeight: 900, color: '#0E2C7E', marginTop: '2px' }}>{clientExpToday}</div>
+            <div style={{ border: '2.5px solid #0E2C7E', borderRadius: '18px', padding: '12px 14px', textAlign: 'center' }}>
+              <div style={{ fontSize: '13px', color: '#2459D2', fontWeight: 700 }}>Expense at today's rate (P.M.)</div>
+              <div style={{ fontSize: '20px', fontWeight: 900, color: '#0E2C7E', marginTop: '3px' }}>{clientExpToday}</div>
             </div>
-            <div style={{ border: '2.5px solid #0E2C7E', borderRadius: '18px', padding: '10px 14px', textAlign: 'center' }}>
-              <div style={{ fontSize: '12px', color: '#2459D2', fontWeight: 700 }}>Expense at Retirement (P.M.)</div>
-              <div style={{ fontSize: '18px', fontWeight: 900, color: '#0E2C7E', marginTop: '2px' }}>{clientExpAtRet}</div>
+            <div style={{ border: '2.5px solid #0E2C7E', borderRadius: '18px', padding: '12px 14px', textAlign: 'center' }}>
+              <div style={{ fontSize: '13px', color: '#2459D2', fontWeight: 700 }}>Expense at Retirement (P.M.)</div>
+              <div style={{ fontSize: '20px', fontWeight: 900, color: '#0E2C7E', marginTop: '3px' }}>{clientExpAtRet}</div>
             </div>
-            <div style={{ border: '2.5px solid #0E2C7E', borderRadius: '18px', padding: '10px 14px', textAlign: 'center' }}>
-              <div style={{ fontSize: '12px', color: '#2459D2', fontWeight: 700 }}>Monthly Investment Required</div>
-              <div style={{ fontSize: '18px', fontWeight: 900, color: '#0E2C7E', marginTop: '2px' }}>{clientMonthlySip}</div>
+            <div style={{ border: '2.5px solid #0E2C7E', borderRadius: '18px', padding: '12px 14px', textAlign: 'center' }}>
+              <div style={{ fontSize: '13px', color: '#2459D2', fontWeight: 700 }}>Monthly Investment Required</div>
+              <div style={{ fontSize: '20px', fontWeight: 900, color: '#0E2C7E', marginTop: '3px' }}>{clientMonthlySip}</div>
             </div>
-            <div style={{ border: '2.5px solid #0E2C7E', borderRadius: '18px', padding: '10px 14px', textAlign: 'center' }}>
-              <div style={{ fontSize: '12px', color: '#2459D2', fontWeight: 700 }}>Lump Sum Investment Required</div>
-              <div style={{ fontSize: '18px', fontWeight: 900, color: '#0E2C7E', marginTop: '2px' }}>{clientLumpSum}</div>
+            <div style={{ border: '2.5px solid #0E2C7E', borderRadius: '18px', padding: '12px 14px', textAlign: 'center' }}>
+              <div style={{ fontSize: '13px', color: '#2459D2', fontWeight: 700 }}>Lump Sum Investment Required</div>
+              <div style={{ fontSize: '20px', fontWeight: 900, color: '#0E2C7E', marginTop: '3px' }}>{clientLumpSum}</div>
             </div>
           </div>
         </div>
@@ -1438,7 +1468,7 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
               insuranceData.items.map((ins, idx) => (
                 <tr key={idx}>
                   <td style={{ padding: '10px 6px', border: '1px solid #cbd5e1', fontWeight: 600 }}>
-                    {ins.need || ins.goal || 'Insurance Need'}
+                    {formatGoalTitle(ins.need || ins.goal || 'Insurance Need', activeChildren, goals)}
                   </td>
                   <td style={{ padding: '10px 4px', border: '1px solid #cbd5e1', textAlign: 'center' }}>
                     {ins.years !== undefined && ins.years !== null ? ins.years : '—'}
@@ -1602,7 +1632,7 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
               }
 
               return finalRows.map((row, idx) => {
-                const goalTitle = row.goal || row.goal_name || row.name || 'Goal';
+                const goalTitle = row.is_retirement ? (row.goal || 'Retirement Planning') : (formatGoalTitle(row, activeChildren, goals) || row.goal || row.goal_name || row.name || 'Goal');
                 const targetYear = row.target_year !== undefined && row.target_year !== null && row.target_year !== '' ? String(row.target_year) : '—';
                 const monthlyInvest = formatInrFull(row.monthly_investment, '₹0');
 
@@ -1624,8 +1654,8 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
 
             {/* Combined Total Monthly Investment Row */}
             <tr style={{ backgroundColor: '#2459D2', fontWeight: 900 }}>
-              <td colSpan="2" style={{ padding: '14px 12px', border: '1px solid #cbd5e1', fontSize: '14px', color: '#ffffff' }}>Total Monthly Investment</td>
-              <td style={{ padding: '14px 12px', border: '1px solid #cbd5e1', textAlign: 'right', fontSize: '16px', color: '#ffffff', whiteSpace: 'nowrap' }}>
+              <td colSpan="2" style={{ padding: '14px 12px', border: '1px solid #cbd5e1', fontSize: '16px', color: '#ffffff', fontWeight: 900 }}>Total Monthly Investment Required</td>
+              <td style={{ padding: '14px 12px', border: '1px solid #cbd5e1', textAlign: 'right', fontSize: '18px', color: '#ffffff', whiteSpace: 'nowrap', fontWeight: 900 }}>
                 {formatInrFull(
                   invSummary?.total_monthly_investment ||
                   summary?.monthly_investment_required ||
@@ -2030,8 +2060,8 @@ const formatDisplayVal = (val, defaultVal = '₹0') => {
                 </svg>
               </div>
               <div style={{ fontSize: '11px', fontWeight: 600, color: '#00297c', lineHeight: 1.35, letterSpacing: '-0.01em' }}>
-                <div>kailashmalpani@wealthwisdom.com</div>
-                <div>keshavmalpani@wealthwisdom.com</div>
+                <div>kailashmalpani@wealthswisdom.com</div>
+                <div>keshavmalpani@wealthswisdom.com</div>
               </div>
             </div>
 

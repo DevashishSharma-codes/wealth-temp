@@ -154,7 +154,7 @@ export function Navbar({ onOpenContact }) {
 
         {/* Right CTA Button */}
         <div className="hidden sm:flex items-center gap-3">
-          <div className="hidden xl:inline-flex items-center gap-1.5 bg-white/80 border border-white text-[#2459D2] text-[11px] font-semibold px-3.5 py-1.5 rounded-full uppercase tracking-wider select-none shadow-2xs backdrop-blur-sm">
+          <div className="inline-flex items-center gap-1.5 bg-white/80 border border-white text-[#2459D2] text-[11px] font-semibold px-3.5 py-1.5 rounded-full uppercase tracking-wider select-none shadow-2xs backdrop-blur-sm">
             <span className="w-2 h-2 rounded-full bg-[#2459D2] animate-pulse" />
             <span>DIY Assessment</span>
           </div>
@@ -168,10 +168,14 @@ export function Navbar({ onOpenContact }) {
         </div>
 
         {/* Mobile Hamburger Menu Button */}
-        <div className="flex lg:hidden items-center gap-2">
+        <div className="flex lg:hidden items-center gap-1.5 sm:gap-2">
+          <div className="sm:hidden inline-flex items-center gap-1 bg-white/80 border border-white text-[#2459D2] text-[9.5px] xs:text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider select-none shadow-2xs backdrop-blur-sm shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#2459D2] animate-pulse" />
+            <span>DIY Assessment</span>
+          </div>
           <Link
             to="/assessment"
-            className="sm:hidden glass-morphism-btn !rounded-full px-3.5 py-1.5 text-xs font-bold cursor-pointer"
+            className="sm:hidden glass-morphism-btn !rounded-full px-3 py-1.5 text-xs font-bold cursor-pointer whitespace-nowrap"
           >
             Assessment &rarr;
           </Link>
